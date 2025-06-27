@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FITHSCS Mobile App Test Reports</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        /* [Keep all existing styles] */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- [Keep existing header and controls] -->
+        
+        <div class="stats-grid">
+            <!-- [Keep existing stat cards] -->
+        </div>
+
+        <div class="branches-section">
+            <!-- [Keep branch tabs and runs container] -->
+        </div>
+
+        <div class="loading" id="loading">Loading test reports...</div>
+    </div>
+
+    <div id="testModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // ... existing TestDashboard class ...
+
+            showDetails(run) {
+                const modal = document.getElementById('testModal');
+                const content = document.getElementById('modalContent');
+
+                // Format coverage data
+                const coverageItems = run.coverage ? Object.entries(run.coverage)
+                    .filter(([key]) => !['pct', 'covered', 'skipped'].includes(key))
+                    .map(([metric, data]) => `
+                        <div class="run-detail">
+                            <span class="run-detail-label">${metric}:</span>
+                            <span>${data.pct}%</span>
+                        </div>
+                    `).join('') : '<p>No coverage data available</p>';
+
+                content.innerHTML = `
+                    <h2>Test Run #${run.runNumber} Details</h2>
+                    <div class="run-details">
+                        <p><strong>Branch:</strong> ${run.branch}</p>
+                        <p><strong>Commit:</strong> ${run.commit || 'N/A'}</p>
+                        <p><strong>Author:</strong> ${run.actor}</p>
+                        <p><strong>Date:</strong> ${new Date(run.timestamp).toLocaleString()}</p>
+                        <p><strong>Status:</strong> <span class="${run.status}">${run.status}</span></p>
+                    </div>
+
+                    <h3>Code Coverage</h3>
+                    <div class="run-details">
+                        ${coverageItems}
+                    </div>
+
+                    ${run.coverage ? `
+                    <div class="coverage-chart">
+                        <canvas id="coverageChart" width="400" height="200"></canvas>
+                    </div>
+                    ` : ''}
+
+                    <h3>Folder Structure</h3>
+                    <div class="folder-structure">
+                        reports/<br>
+                        ├── ${run.branch}/<br>
+                        │   ├── ${run.runNumber}/<br>
+                        │   │   ├── coverage/ (HTML report)<br>
+                        │   │   ├── test-results.xml<br>
+                        │   │   └── test-summary.json<br>
+                        │   └── latest/ (symlink to latest run)<br>
+                        └── index.json
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <a href="./reports/${run.branch}/${run.runNumber}/coverage/index.html" 
+                           target="_blank" 
+                           style="background: #667eea; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none;">
+                            View Full Coverage Report
+                        </a>
+                    </div>
+                `;
+
+                // Render coverage chart if data exists
+                if (run.coverage) {
+                    setTimeout(() => this.renderCoverageChart(run.coverage), 100);
+                }
+
+                modal.style.display = "block";
+            }
+
+            renderCoverageChart(coverageData) {
+                const ctx = document.getElementById('coverageChart').getContext('2d');
+                const metrics = ['lines', 'statements', 'functions', 'branches'];
+                const data = metrics.map(metric => coverageData[metric]?.pct || 0);
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: metrics,
+                        datasets: [{
+                            label: 'Coverage %',
+                            data: data,
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(75, 192, 192, 0.7)',
+                                'rgba(153, 102, 255, 0.7)',
+                                'rgba(255, 159, 64, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: 'Percentage'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.parsed.y}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // ... rest of the class ...
+        
+        // Initialize dashboard when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new TestDashboard();
+        });
+    </script>
+</body>
+</html>
