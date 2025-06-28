@@ -1,264 +1,484 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FITHSCS Mobile App - Test Reports Dashboard</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your external CSS file -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Delivery Performance Analytics - Test Reports</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 35%, #334155 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #e2e8f0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridShift 25s linear infinite;
+        }
+
+        @keyframes gridShift {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(40px, 40px);
+            }
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-content {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 20px;
+            padding: 4rem 3.5rem;
+            text-align: center;
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+        }
+
+        .header-section {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .logistics-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #1e40af, #3b82f6, #10b981);
+            border-radius: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow:
+                0 20px 40px rgba(59, 130, 246, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: deliveryPulse 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes deliveryPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 20px 40px rgba(59, 130, 246, 0.25);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 25px 50px rgba(59, 130, 246, 0.35);
+            }
+        }
+
+        .logistics-icon::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            border-radius: 24px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: borderGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            0% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        .logistics-icon svg {
+            width: 45px;
+            height: 45px;
+            fill: white;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #e2e8f0 0%, #3b82f6 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.9;
+        }
+
+        .status-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, #3B82F6, #1E3A8A);
+
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow:
+                0 10px 25px rgba(59, 130, 246, 0.25),
+                /* Light Blue shadow */
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            /* Keep subtle highlight */
+
+            border: 1px solid rgba(30, 58, 138, 0.3);
+            /* Dark Blue border tint */
+
+        }
+
+        .route-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #10b981;
+            opacity: 0.8;
+        }
+
+        .route-dot {
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: routeBlink 2s ease-in-out infinite;
+        }
+
+        @keyframes routeBlink {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(0.8);
+            }
+        }
+
+        .description {
+            font-size: 1.15rem;
+            line-height: 1.65;
+            color: #cbd5e1;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .metric-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-radius: 16px;
+            padding: 1.75rem 1.25rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #10b981, #3b82f6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-8px);
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .metric-card:hover::before {
+            opacity: 1;
+        }
+
+        .metric-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .metric-card:nth-child(2) .metric-icon {
+            background: linear-gradient(135deg, #059669, #10b981);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .metric-card:nth-child(3) .metric-icon {
+            background: linear-gradient(135deg, #374151, #4b5563);
+            box-shadow: 0 8px 20px rgba(75, 85, 99, 0.2);
+        }
+
+        .metric-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .metric-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .metric-subtitle {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: rgba(15, 23, 42, 0.8);
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
+            position: relative;
+        }
+
+        .company-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #246ed5;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .accent-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #4f90fa, #29c490);
+            margin: 0.5rem auto 0;
+            border-radius: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 3rem 2.5rem;
+                margin: 1rem;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            .status-container {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <div class="dashboard-container">
-        <!-- Dashboard Header -->
-        <header class="dashboard-header">
-            <div class="header-content">
-                <div class="brand-section">
-                    <div class="logo-container">
-                        <!-- Animated Logo - Representing Logistic Movement -->
-                        <div class="logo-icon">
-                            <div class="delivery-icon">
-                                <div class="package-box"></div>
-                                <div class="delivery-path"></div>
-                            </div>
-                        </div>
-                        <div class="brand-info">
-                            <h1 class="brand-title">FITHSCS Mobile App</h1>
-                            <p class="brand-subtitle">Professional Test Reports Dashboard</p>
-                        </div>
-                    </div>
+    <div class="grid-overlay"></div>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="header-section">
+                <div class="logistics-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M17 8V7c0-2.76-2.24-5-5-5S7 4.24 7 7v1c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 7c0-1.66 1.34-3 3-3s3 1.34 3 3v1H9V7z" />
+                        <path
+                            d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" />
+                        <path
+                            d="M20 8h-3V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z" />
+                        <path d="M3.5 18l4-4 4 4 8.5-8.5" stroke="currentColor" stroke-width="2" fill="none" />
+                        <path d="M20 4L9 15l-5-5" stroke="currentColor" stroke-width="2" fill="none" />
+                        <path d="M7 12l3-3 7 7-3 3z" />
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7z" />
+                        <path d="M20.2 7.8l-7.7 7.7-4.7-4.7" stroke="currentColor" stroke-width="2" fill="none" />
+                        <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2.5" fill="none" />
+                        <path
+                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                        <path
+                            d="M7.5 4.21l4.5 2.6 4.5-2.6M12 6.81V17M17 8v8a1 1 0 0 1-.5.87L12 19.5l-4.5-2.63A1 1 0 0 1 7 16V8l5 3 5-3z" />
+                    </svg>
                 </div>
-                <div class="header-meta">
-                    <span class="status-indicator">
-                        <span class="pulse-dot"></span> CI/CD Status: Online
-                    </span>
-                    <span id="last-updated" class="text-muted text-sm">Last updated: -</span>
+
+                <h1>App performance benchmark</h1>
+                <p class="subtitle">Unit | Integration | E2E </p>
+            </div>
+
+            <div class="status-container">
+                <div class="status-badge">
+                    <div class="route-dot"></div>
+                    coming soon 
+                </div>
+                <div class="route-indicator">
+                    <span>MANIFEST_STATUS:</span>
+                    <div class="route-dot"></div>
+                    <span>SYNC</span>
                 </div>
             </div>
-        </header>
 
-        <!-- Main Dashboard Content Area -->
-        <main class="dashboard-main">
-            <!-- Loading State -->
-            <div id="loading" class="loading-container">
-                <div class="loading-spinner"></div>
-                <div class="loading-text">Analyzing delivery routes and test reports...</div>
-            </div>
-            
-            <!-- Error State -->
-            <div id="error" class="error-container hidden">
-                <div class="error-icon">⚠️</div>
-                <h2 class="error-title">Unable to Access Delivery Data</h2>
-                <p class="error-message">
-                    The system encountered an issue fetching test reports.
-                    <br>Please ensure `index.json` is available and accessible. Retrying in 30 seconds...
-                </p>
-            </div>
-            
-            <!-- Dashboard Sections (hidden by default, shown by JS) -->
-            <div id="dashboard" class="hidden">
-                <!-- KPI Statistics Section -->
-                <section class="kpi-section">
-                    <div class="section-header">
-                        <h2>Key Performance Indicators</h2>
-                        <p class="section-subtitle">Real-time insights into test pipeline health and efficiency.</p>
-                    </div>
-                    <div class="kpi-grid">
-                        <div class="kpi-card primary">
-                            <div class="kpi-header">
-                                <div class="kpi-icon delivery-success">
-                                    <div class="check-animation"></div>
-                                </div>
-                                <div class="kpi-trend positive" id="success-trend-kpi">
-                                    <!-- Trend will be injected here -->
-                                </div>
-                            </div>
-                            <div class="kpi-content">
-                                <div class="kpi-value" id="total-runs">0</div>
-                                <div class="kpi-label">Total Delivery Runs</div>
-                                <div class="kpi-subtitle">Completed CI/CD cycles</div>
-                            </div>
-                        </div>
-                        
-                        <div class="kpi-card secondary">
-                            <div class="kpi-header">
-                                <div class="kpi-icon deployment-speed">
-                                    <div class="speed-rings">
-                                        <div class="ring ring-1"></div>
-                                        <div class="ring ring-2"></div>
-                                        <div class="ring ring-3"></div>
-                                    </div>
-                                </div>
-                                <div class="kpi-trend stable" id="branches-trend-kpi">
-                                    <!-- Trend will be injected here -->
-                                </div>
-                            </div>
-                            <div class="kpi-content">
-                                <div class="kpi-value" id="total-branches">0</div>
-                                <div class="kpi-label">Active Delivery Hubs</div>
-                                <div class="kpi-subtitle">Distinct branches in action</div>
-                            </div>
-                        </div>
-                        
-                        <div class="kpi-card tertiary">
-                            <div class="kpi-header">
-                                <div class="kpi-icon branch-network">
-                                    <div class="network-nodes">
-                                        <div class="node main-node"></div>
-                                        <div class="node branch-node"></div>
-                                        <div class="node branch-node"></div>
-                                        <div class="connection-line"></div>
-                                    </div>
-                                </div>
-                                <div class="kpi-trend positive" id="rate-trend-kpi">
-                                    <!-- Trend will be injected here -->
-                                </div>
-                            </div>
-                            <div class="kpi-content">
-                                <div class="kpi-value" id="success-rate">0%</div>
-                                <div class="kpi-label">Successful Deliveries</div>
-                                <div class="kpi-subtitle">Overall test success rate</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+            <p class="description">
+                Mobile application testing frameworks are currently under development. We're doing our 
+                best to provide meaningful measurements and representations of FITHSCS App performance based on 
+                a set of benchmarks.
+            </p>
 
-                <!-- Deployment Status Overview -->
-                <section class="deployment-status-section">
-                    <div class="section-header">
-                        <h2>Deployment Readiness</h2>
-                        <p class="section-subtitle">Real-time status of critical release branches.</p>
-                    </div>
-                    <div id="deployment-overview-cards" class="kpi-grid">
-                        <!-- Deployment status cards will be rendered here -->
-                    </div>
-
-                    <div class="timeline-header mt-6">
-                        <h3>Delivery Flow Timeline</h3>
-                    </div>
-                    <div class="timeline-track">
-                        <!-- Animated timeline representing successful deliveries -->
-                        <svg class="delivery-truck-svg" viewBox="0 0 100 20" preserveAspectRatio="xMidYMid meet">
-                            <path class="road-line" d="M0 10 L100 10" stroke="#374151" stroke-width="1"></path>
-                            <circle class="truck-wheel" cx="15" cy="10" r="3" fill="#60a5fa"></circle>
-                            <circle class="truck-wheel" cx="85" cy="10" r="3" fill="#60a5fa"></circle>
-                            <rect class="truck-body" x="10" y="5" width="80" height="10" rx="2" fill="#2563eb"></rect>
-                            <polyline class="truck-roof" points="10,5 20,0 80,0 90,5" fill="#1e40af"></polyline>
-                            <circle class="package-bubble" cx="50" cy="10" r="4" fill="#10b981" stroke="#fff" stroke-width="0.5"></circle>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                         </svg>
                     </div>
-                </section>
+                    <div class="metric-title">App Responsiveness</div>
+                    <div class="metric-subtitle">Tap-to-action speed</div>
+                    <div class = "metric-subtitle">Button response delays</div>
+                    <div class="metric-subtitle">Screen loading times</div>
+                </div>
 
-                <!-- Advanced Filters & Search -->
-                <section class="card mb-6">
-                    <div class="card-header">
-                        <h2 class="chart-title">🔍 Trace & Filter Deliveries</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="grid grid-cols-4 gap-4 mb-4">
-                            <input type="text" id="search-input" placeholder="Search branch, commit, or test..." class="form-input" />
-                            <select id="status-filter" class="form-select">
-                                <option value="">All Status</option>
-                                <option value="success">✅ Success</option>
-                                <option value="failed">❌ Failed</option>
-                                <option value="warning">⚠️ Warning</option>
-                            </select>
-                            <input type="date" id="start-date" class="form-input" />
-                            <input type="date" id="end-date" class="form-input" />
-                        </div>
-                        <div class="flex gap-2 mb-2">
-                            <button id="filter-apply" class="chart-toggle">Apply Filters</button>
-                            <button id="filter-reset" class="chart-toggle">Reset</button>
-                            <select id="sort-order" class="form-select">
-                                <option value="date-desc">Sort by Date ↓</option>
-                                <option value="date-asc">Sort by Date ↑</option>
-                                <option value="success-rate-desc">Success Rate ↓</option>
-                                <option value="success-rate-asc">Success Rate ↑</option>
-                                <option value="coverage-desc">Coverage ↓</option>
-                                <option value="coverage-asc">Coverage ↑</option>
-                            </select>
-                        </div>
-                        <div class="flex gap-2">
-                            <button class="chart-toggle" onclick="applyPreset('failed')">Failed Deliveries Only</button>
-                            <button class="chart-toggle" onclick="applyPreset('low-coverage')">Critical Path Unverified</button>
-                            <button class="chart-toggle" onclick="applyPreset('recent')">Recent Activities</button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Success Rate Trend Chart -->
-                <section class="charts-section">
-                    <div class="card-header">
-                        <div class="chart-header">
-                            <h2 class="chart-title">📈 Delivery Success Rate Trends</h2>
-                            <div class="chart-controls">
-                                <button class="chart-toggle active" data-period="7d">7 Days</button>
-                                <button class="chart-toggle" data-period="30d">30 Days</button>
-                                <button class="chart-toggle" data-period="90d">90 Days</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <svg class="svg-chart" id="success-trend-chart">
-                            <!-- Chart will be generated by JavaScript -->
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                            <path
+                                d="M16.24 7.76C15.07 6.59 13.54 6 12 6v6l-4.24 4.24c2.34 2.34 6.14 2.34 8.48 0 2.34-2.34 2.34-6.14 0-8.48z" />
                         </svg>
                     </div>
-                </section>
+                    <div class="metric-title">Scanner Reliability</div>
+                    <div class="metric-subtitle">Scan success rate</div>
+                    <div class="metric-subtitle">Low-light performance</div>
+                    <div class="metric-subtitle">Damaged barcode handling</div>                 
 
-                <!-- Coverage Visualization Grid -->
-                <section class="charts-section">
-                    <div class="card-header">
-                        <h2 class="chart-title">📦 Package Coverage Metrics</h2>
-                    </div>
-                    <div class="coverage-grid" id="coverage-grid">
-                        <!-- Coverage cards will be generated by JavaScript -->
-                    </div>
-                </section>
 
-                <!-- Branch Performance Section -->
-                <section class="charts-section">
-                    <div class="card-header">
-                        <h2 class="chart-title">🚚 Delivery Hub Performance</h2>
-                    </div>
-                    <div class="branch-performance" id="branch-performance">
-                        <!-- Performance cards will be generated by JavaScript -->
-                    </div>
-                </section>
+                </div>
 
-                <!-- Template for Branch Detail Expansion (Hidden by default) -->
-                <div class="branch-detail-template hidden" id="branch-details-template">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h3 class="text-lg font-semibold">Test Runs for <span id="branch-detail-name"></span></h3>
-                        </div>
-                        <div class="card-body" id="branch-detail-body">
-                            <div class="branch-loading text-muted">Loading test runs...</div>
-                            <table class="w-full text-sm hidden">
-                                <thead>
-                                    <tr>
-                                        <th class="text-left p-2">Run #</th>
-                                        <th class="text-left p-2">Status</th>
-                                        <th class="text-left p-2">Date</th>
-                                        <th class="text-left p-2">Duration</th>
-                                        <th class="text-left p-2">Error (if any)</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="branch-run-list">
-                                    <!-- Individual runs for this branch will be populated via JS -->
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+       <svg viewBox="0 0 24 24">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+    <path d="M12 6v6l4 2" opacity="0.5"/>
+</svg>
                     </div>
+                    <div class="metric-title">Offline Performance</div>
+                    <div class="metric-subtitle">Data sync when reconnected</div>
+                    <div class="metric-subtitle">Local storage reliability</div>
+                    <div class="metric-subtitle">Feature availability offline</div>
+                </div>
+                 <div class="metric-card">
+                    <div class="metric-icon">
+              <svg viewBox="0 0 24 24">
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+</svg>
+                    </div>
+                    <div class="metric-title">Location Accuracy</div>
+                    <div class="metric-subtitle">GPS precision</div>
+                    <div class="metric-subtitle">Geofencing</div>
+                    <div class="metric-subtitle">Route information</div>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
 
-    <!-- Back to Top Button -->
-    <button id="back-to-top" class="chart-toggle fixed-button top-button">
-        ↑ Top
-    </button>
-
-    <script src="dashboard.js"></script> <!-- Link to your external JavaScript file -->
-    <script src="update_reports.js"></script> 
+    <footer>
+        <div class="company-name">Netconn Engineering</div>
+        <div class="accent-line"></div>
+    </footer>
 </body>
+
 </html>
