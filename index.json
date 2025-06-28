@@ -1,5 +1,5 @@
 {
-  "generated": "2025-06-28T18:03:42.334Z",
+  "generated": "2025-06-28T18:04:48.680Z",
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "branches": {
@@ -144,6 +144,72 @@
     "main": {
       "runs": [
         {
+          "runNumber": "48",
+          "projectName": "fithscs",
+          "version": "1.0.0",
+          "timestamp": "2025-06-28T18:04:34.733Z",
+          "branch": "main",
+          "commit": "351132deb5f88ade9c338b7f24d3564947657504",
+          "shortCommit": "351132d",
+          "actor": "brukGit",
+          "status": "success",
+          "lintStatus": "passed",
+          "testResults": {
+            "passed": 0,
+            "failed": 0,
+            "skipped": 0,
+            "total": 0,
+            "status": "success"
+          },
+          "coverage": {
+            "lines": 0.47,
+            "functions": 0.57,
+            "branches": 1.58,
+            "statements": 0.46
+          },
+          "folderStructure": {
+            "app": {
+              "description": "Main application screens",
+              "structure": {
+                "(auth)": "Authentication screens",
+                "(tabs)": "Main app tabs with navigation",
+                "delivery": "Delivery management screens"
+              }
+            },
+            "components": {
+              "description": "Reusable UI components",
+              "structure": {
+                "battery": "Battery status components",
+                "common": "Common UI elements",
+                "delivery": "Delivery-specific components",
+                "ePickup": "Electronic pickup components",
+                "ePod": "Electronic proof of delivery",
+                "map": "Map integration components",
+                "scanner": "QR/Barcode scanning components",
+                "ui": "Core UI components",
+                "__tests__": "Component unit tests"
+              }
+            },
+            "services": {
+              "description": "Business logic and external integrations",
+              "structure": {
+                "api": "API integration services",
+                "database": "Local database operations",
+                "sync": "Data synchronization logic"
+              }
+            },
+            "redux": {
+              "description": "State management with Redux Toolkit"
+            },
+            "hooks": {
+              "description": "Custom React hooks"
+            },
+            "utils": {
+              "description": "Utility functions and helpers"
+            }
+          }
+        },
+        {
           "runNumber": "36",
           "projectName": "fithscs",
           "version": "1.0.0",
@@ -211,13 +277,13 @@
         }
       ],
       "latestRun": {
-        "runNumber": "36",
+        "runNumber": "48",
         "projectName": "fithscs",
         "version": "1.0.0",
-        "timestamp": "2025-06-27T21:22:36.772Z",
+        "timestamp": "2025-06-28T18:04:34.733Z",
         "branch": "main",
-        "commit": "99e4a5181c3865d297eddc0cb9ede164de81fa8d",
-        "shortCommit": "99e4a51",
+        "commit": "351132deb5f88ade9c338b7f24d3564947657504",
+        "shortCommit": "351132d",
         "actor": "brukGit",
         "status": "success",
         "lintStatus": "passed",
@@ -276,12 +342,12 @@
           }
         }
       },
-      "totalRuns": 1,
-      "successfulRuns": 1
+      "totalRuns": 2,
+      "successfulRuns": 2
     }
   },
   "stats": {
-    "totalRuns": 2,
+    "totalRuns": 3,
     "totalBranches": 2,
     "successRate": 100
   }
