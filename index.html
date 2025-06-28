@@ -4,48 +4,535 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FITHSCS Mobile App - Test Reports Dashboard</title>
-    <link rel="stylesheet" href="styles.css"> </head>
+    <link rel="stylesheet" href="styles.css">
+</head>
 <body>
     <header>
         <div class="container">
-            <h1>FITHSCS Mobile App - Test Reports Dashboard</h1>
-            <p id="last-updated"></p>
+            <div class="header-content">
+                <div class="project-info">
+                    <h1>FITHSCS Mobile App</h1>
+                    <p class="project-subtitle">React Native • Expo • Test Benchmarks Dashboard</p>
+                </div>
+                <div class="header-meta">
+                    <p id="last-updated" class="last-updated"></p>
+                    <a id="repo-link" class="repo-link" href="#" target="_blank">
+                        View Repository →
+                    </a>
+                </div>
+            </div>
         </div>
     </header>
 
     <main class="container">
-        <section id="overall-stats" class="dashboard-section">
-            <h2>Overall Statistics</h2>
-            <div class="stats-grid">
-                <div class="stat-card total-runs">
-                    <h3>Total Runs</h3>
-                    <p id="total-runs"></p>
+        <!-- Latest Build Status - Hero Section -->
+        <section id="latest-build" class="dashboard-section hero-section">
+            <div class="latest-build-card">
+                <div class="build-status">
+                    <h2>Latest Build Status</h2>
+                    <div id="latest-build-content" class="build-content">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
                 </div>
-                <div class="stat-card total-branches">
-                    <h3>Total Branches</h3>
-                    <p id="total-branches"></p>
-                </div>
-                <div class="stat-card success-rate">
-                    <h3>Success Rate</h3>
-                    <p id="success-rate"></p>
+                <div class="quick-stats">
+                    <div class="quick-stat">
+                        <span class="stat-label">Success Rate</span>
+                        <span id="quick-success-rate" class="stat-value"></span>
+                    </div>
+                    <div class="quick-stat">
+                        <span class="stat-label">Total Runs</span>
+                        <span id="quick-total-runs" class="stat-value"></span>
+                    </div>
+                    <div class="quick-stat">
+                        <span class="stat-label">Active Branches</span>
+                        <span id="quick-total-branches" class="stat-value"></span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="branches-summary" class="dashboard-section">
-            <h2>Branches Summary</h2>
-            <div id="branches-container" class="branches-grid">
+        <!-- Main Branch Focus (Default View) -->
+        <section id="main-branch-focus" class="dashboard-section">
+            <div class="section-header">
+                <h2>Main Branch Analysis</h2>
+                <p class="section-description">Production-ready branch performance and stability metrics</p>
+            </div>
+            
+            <div class="main-branch-grid">
+                <div class="branch-summary-card">
+                    <h3>Branch Health</h3>
+                    <div id="main-branch-health" class="health-indicators">
+                        <!-- Populated by JS -->
+                    </div>
                 </div>
+                
+                <div class="recent-runs-card">
+                    <h3>Recent Test Runs</h3>
+                    <div id="main-recent-runs" class="runs-timeline">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="folder-structure" class="dashboard-section">
-            <h2>Project Folder Structure</h2>
-            <div id="folder-structure-content" class="folder-tree">
+        <!-- Navigation Controls -->
+        <section id="view-controls" class="dashboard-section">
+            <div class="view-toggle-container">
+                <h3>Detailed Analysis</h3>
+                <div class="view-buttons">
+                    <button id="btn-all-branches" class="view-btn" data-view="branches">
+                        All Branches Overview
+                    </button>
+                    <button id="btn-codebase-structure" class="view-btn" data-view="structure">
+                        Codebase Structure
+                    </button>
+                    <button id="btn-performance-trends" class="view-btn" data-view="trends">
+                        Performance Trends
+                    </button>
                 </div>
+            </div>
+        </section>
+
+        <!-- Detailed Views (Initially Hidden) -->
+        <section id="detailed-views" class="dashboard-section">
+            
+            <!-- All Branches View -->
+            <div id="branches-detailed-view" class="detailed-view" style="display: none;">
+                <div class="section-header">
+                    <h2>All Branches Analysis</h2>
+                    <p class="section-description">Comprehensive view of all development branches and their test performance</p>
+                </div>
+                <div id="branches-container" class="branches-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Codebase Structure View -->
+            <div id="structure-detailed-view" class="detailed-view" style="display: none;">
+                <div class="section-header">
+                    <h2>Project Architecture Overview</h2>
+                    <p class="section-description">React Native + Expo application structure and organization</p>
+                </div>
+                
+                <div class="architecture-overview">
+                    <div class="tech-stack-card">
+                        <h3>Technology Stack</h3>
+                        <div class="tech-badges">
+                            <span class="tech-badge react-native">React Native</span>
+                            <span class="tech-badge expo">Expo</span>
+                            <span class="tech-badge typescript">TypeScript</span>
+                            <span class="tech-badge redux">Redux Toolkit</span>
+                        </div>
+                    </div>
+                    
+                    <div class="folder-structure-card">
+                        <h3>Project Structure</h3>
+                        <div id="folder-structure-content" class="folder-tree">
+                            <!-- Populated by JS from both JSON and folder-structure.txt -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Trends View -->
+            <div id="trends-detailed-view" class="detailed-view" style="display: none;">
+                <div class="section-header">
+                    <h2>Performance & Reliability Trends</h2>
+                    <p class="section-description">Historical analysis of test execution patterns and build reliability</p>
+                </div>
+                
+                <div class="trends-grid">
+                    <div class="trend-card">
+                        <h3>Success Rate Trend</h3>
+                        <div id="success-trend-chart" class="chart-container">
+                            <!-- Chart placeholder -->
+                            <p class="chart-placeholder">Success rate visualization coming soon</p>
+                        </div>
+                    </div>
+                    
+                    <div class="trend-card">
+                        <h3>Build Duration Analysis</h3>
+                        <div id="duration-trend-chart" class="chart-container">
+                            <!-- Chart placeholder -->
+                            <p class="chart-placeholder">Build duration trends coming soon</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="error-analysis-card">
+                    <h3>Common Issues & Patterns</h3>
+                    <div id="error-patterns" class="error-patterns">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Consultant Insights Section -->
+        <section id="consultant-insights" class="dashboard-section">
+            <div class="insights-card">
+                <h2>Key Insights for Code Review</h2>
+                <div id="insights-content" class="insights-grid">
+                    <!-- Populated by JS with calculated insights -->
+                </div>
+            </div>
         </section>
     </main>
 
     <button id="back-to-top" title="Go to top">⬆️</button>
 
-    <script src="dashboard.js"></script> </body>
+    <script>
+        // Enhanced dashboard functionality
+        class TestDashboard {
+            constructor() {
+                this.data = null;
+                this.currentView = 'main';
+                this.init();
+            }
+
+            async init() {
+                try {
+                    await this.loadData();
+                    this.setupEventListeners();
+                    this.renderDashboard();
+                } catch (error) {
+                    console.error('Failed to initialize dashboard:', error);
+                    this.showError('Failed to load test data');
+                }
+            }
+
+            async loadData() {
+                const response = await fetch('index.json');
+                this.data = await response.json();
+            }
+
+            setupEventListeners() {
+                // View toggle buttons
+                document.querySelectorAll('.view-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const view = e.target.dataset.view;
+                        this.switchView(view);
+                    });
+                });
+
+                // Back to top button
+                const backToTop = document.getElementById('back-to-top');
+                window.addEventListener('scroll', () => {
+                    backToTop.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+                });
+                backToTop.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            switchView(view) {
+                // Hide all detailed views
+                document.querySelectorAll('.detailed-view').forEach(el => {
+                    el.style.display = 'none';
+                });
+
+                // Remove active class from all buttons
+                document.querySelectorAll('.view-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Show selected view and activate button
+                const viewElement = document.getElementById(`${view}-detailed-view`);
+                const buttonElement = document.querySelector(`[data-view="${view}"]`);
+                
+                if (viewElement) {
+                    viewElement.style.display = 'block';
+                    buttonElement.classList.add('active');
+                    this.currentView = view;
+                    
+                    // Render specific view content
+                    this.renderDetailedView(view);
+                }
+            }
+
+            renderDashboard() {
+                this.renderHeader();
+                this.renderLatestBuild();
+                this.renderMainBranchFocus();
+                this.renderConsultantInsights();
+            }
+
+            renderHeader() {
+                const lastUpdated = document.getElementById('last-updated');
+                const repoLink = document.getElementById('repo-link');
+                
+                if (this.data.generated) {
+                    const date = new Date(this.data.generated);
+                    lastUpdated.textContent = `Last updated: ${date.toLocaleString()}`;
+                }
+                
+                if (this.data.repository) {
+                    repoLink.href = this.data.repository;
+                }
+            }
+
+            renderLatestBuild() {
+                const latest = this.data.latestRun;
+                const content = document.getElementById('latest-build-content');
+                
+                const statusClass = latest.status === 'success' ? 'success' : 'failed';
+                
+                content.innerHTML = `
+                    <div class="build-info">
+                        <div class="build-status-badge ${statusClass}">
+                            ${latest.status.toUpperCase()}
+                        </div>
+                        <div class="build-details">
+                            <p><strong>Run #${latest.runNumber}</strong> on <strong>${latest.branch}</strong></p>
+                            <p>Commit: <code>${latest.shortCommit}</code> by ${latest.actor}</p>
+                            <p>${new Date(latest.timestamp).toLocaleString()}</p>
+                        </div>
+                    </div>
+                `;
+
+                // Quick stats
+                document.getElementById('quick-success-rate').textContent = `${this.data.stats.successRate}%`;
+                document.getElementById('quick-total-runs').textContent = this.data.stats.totalRuns;
+                document.getElementById('quick-total-branches').textContent = this.data.stats.totalBranches;
+            }
+
+            renderMainBranchFocus() {
+                const mainBranch = this.data.branches.main;
+                if (!mainBranch) return;
+
+                // Branch health indicators
+                const healthContainer = document.getElementById('main-branch-health');
+                const successRate = Math.round((mainBranch.successfulRuns / mainBranch.totalRuns) * 100);
+                
+                healthContainer.innerHTML = `
+                    <div class="health-indicator">
+                        <span class="health-label">Success Rate</span>
+                        <div class="health-bar">
+                            <div class="health-fill" style="width: ${successRate}%"></div>
+                        </div>
+                        <span class="health-value">${successRate}%</span>
+                    </div>
+                    <div class="health-stats">
+                        <div class="health-stat">
+                            <span class="stat-number">${mainBranch.successfulRuns}</span>
+                            <span class="stat-label">Successful</span>
+                        </div>
+                        <div class="health-stat">
+                            <span class="stat-number">${mainBranch.totalRuns - mainBranch.successfulRuns}</span>
+                            <span class="stat-label">Failed</span>
+                        </div>
+                    </div>
+                `;
+
+                // Recent runs timeline
+                const runsContainer = document.getElementById('main-recent-runs');
+                const recentRuns = mainBranch.runs.slice(0, 5);
+                
+                runsContainer.innerHTML = recentRuns.map(run => `
+                    <div class="run-item ${run.status}">
+                        <div class="run-status"></div>
+                        <div class="run-details">
+                            <span class="run-number"># ${run.runNumber}</span>
+                            <span class="run-time">${new Date(run.timestamp).toLocaleDateString()}</span>
+                            <span class="run-duration">${run.duration}s</span>
+                        </div>
+                        ${run.error ? `<div class="run-error">${run.error}</div>` : ''}
+                    </div>
+                `).join('');
+            }
+
+            renderDetailedView(view) {
+                switch(view) {
+                    case 'branches':
+                        this.renderAllBranches();
+                        break;
+                    case 'structure':
+                        this.renderCodebaseStructure();
+                        break;
+                    case 'trends':
+                        this.renderPerformanceTrends();
+                        break;
+                }
+            }
+
+            renderAllBranches() {
+                const container = document.getElementById('branches-container');
+                const branches = Object.entries(this.data.branches);
+                
+                container.innerHTML = branches.map(([name, data]) => {
+                    const successRate = Math.round((data.successfulRuns / data.totalRuns) * 100);
+                    return `
+                        <div class="branch-card">
+                            <div class="branch-header">
+                                <h3>${name}</h3>
+                                <span class="branch-success-rate">${successRate}%</span>
+                            </div>
+                            <div class="branch-stats">
+                                <div class="branch-stat">
+                                    <span class="stat-value">${data.totalRuns}</span>
+                                    <span class="stat-label">Total Runs</span>
+                                </div>
+                                <div class="branch-stat">
+                                    <span class="stat-value">${data.successfulRuns}</span>
+                                    <span class="stat-label">Successful</span>
+                                </div>
+                            </div>
+                            <div class="branch-recent-runs">
+                                ${data.runs.slice(0, 3).map(run => `
+                                    <div class="mini-run ${run.status}">
+                                        <span>#${run.runNumber}</span>
+                                        <span>${run.status}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            renderCodebaseStructure() {
+                const container = document.getElementById('folder-structure-content');
+                const mainBranch = this.data.branches.main;
+                
+                if (mainBranch && mainBranch.folderStructure) {
+                    container.innerHTML = this.buildFolderTree(mainBranch.folderStructure);
+                }
+            }
+
+            buildFolderTree(structure, level = 0) {
+                return Object.entries(structure).map(([name, data]) => {
+                    const indent = '  '.repeat(level);
+                    let html = `<div class="folder-item level-${level}">`;
+                    html += `<span class="folder-name">${name}</span>`;
+                    if (data.description) {
+                        html += `<span class="folder-description">${data.description}</span>`;
+                    }
+                    html += '</div>';
+                    
+                    if (data.structure) {
+                        html += this.buildFolderTree(data.structure, level + 1);
+                    }
+                    
+                    return html;
+                }).join('');
+            }
+
+            renderPerformanceTrends() {
+                // Analyze error patterns
+                const errorPatterns = this.analyzeErrorPatterns();
+                const container = document.getElementById('error-patterns');
+                
+                container.innerHTML = `
+                    <div class="error-pattern-list">
+                        ${errorPatterns.map(pattern => `
+                            <div class="error-pattern-item">
+                                <h4>${pattern.type}</h4>
+                                <p>${pattern.description}</p>
+                                <span class="error-count">${pattern.count} occurrences</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            analyzeErrorPatterns() {
+                const patterns = {};
+                
+                Object.values(this.data.branches).forEach(branch => {
+                    branch.runs.forEach(run => {
+                        if (run.error) {
+                            const type = this.categorizeError(run.error);
+                            if (!patterns[type]) {
+                                patterns[type] = { type, count: 0, description: run.error };
+                            }
+                            patterns[type].count++;
+                        }
+                    });
+                });
+                
+                return Object.values(patterns);
+            }
+
+            categorizeError(error) {
+                if (error.includes('Authentication')) return 'Authentication Issues';
+                if (error.includes('timeout')) return 'Timeout Issues';
+                if (error.includes('Build failed')) return 'Build Failures';
+                if (error.includes('dependency')) return 'Dependency Issues';
+                return 'Other Issues';
+            }
+
+            renderConsultantInsights() {
+                const container = document.getElementById('insights-content');
+                const insights = this.generateInsights();
+                
+                container.innerHTML = insights.map(insight => `
+                    <div class="insight-item ${insight.type}">
+                        <div class="insight-icon">${insight.icon}</div>
+                        <div class="insight-content">
+                            <h4>${insight.title}</h4>
+                            <p>${insight.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            generateInsights() {
+                const insights = [];
+                const mainBranch = this.data.branches.main;
+                
+                // Overall health insight
+                if (this.data.stats.successRate > 85) {
+                    insights.push({
+                        type: 'positive',
+                        icon: '✅',
+                        title: 'High Stability',
+                        description: `${this.data.stats.successRate}% success rate indicates a stable codebase with reliable CI/CD pipeline.`
+                    });
+                } else if (this.data.stats.successRate < 70) {
+                    insights.push({
+                        type: 'warning',
+                        icon: '⚠️',
+                        title: 'Stability Concerns',
+                        description: `${this.data.stats.successRate}% success rate suggests potential reliability issues that need attention.`
+                    });
+                }
+                
+                // Architecture insight
+                insights.push({
+                    type: 'info',
+                    icon: '🏗️',
+                    title: 'Modern Architecture',
+                    description: 'React Native + Expo stack with Redux Toolkit shows modern mobile development practices.'
+                });
+                
+                // Recent activity insight
+                const recentFailures = mainBranch.runs.slice(0, 5).filter(run => run.status === 'failed').length;
+                if (recentFailures > 2) {
+                    insights.push({
+                        type: 'warning',
+                        icon: '🔄',
+                        title: 'Recent Issues',
+                        description: `${recentFailures} failures in last 5 runs on main branch may indicate ongoing issues.`
+                    });
+                }
+                
+                return insights;
+            }
+
+            showError(message) {
+                document.body.innerHTML = `
+                    <div class="error-container">
+                        <h1>Dashboard Error</h1>
+                        <p>${message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize dashboard when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new TestDashboard();
+        });
+    </script>
+</body>
 </html>
