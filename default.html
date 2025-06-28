@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FITHSCS Mobile App - Test Reports Dashboard</title>
+    <style>
+        /* CSS Custom Properties for consistent theming */
+        :root {
+            --color-primary: #2563eb;
+            --color-primary-dark: #1e40af;
+            --color-primary-light: #3b82f6;
+            --color-secondary: #64748b;
+            --color-accent: #0ea5e9;
+            
+            --color-white: #ffffff;
+            --color-gray-50: #f8fafc;
+            --color-gray-100: #f1f5f9;
+            --color-gray-200: #e2e8f0;
+            --color-gray-300: #cbd5e1;
+            --color-gray-400: #94a3b8;
+            --color-gray-500: #64748b;
+            --color-gray-600: #475569;
+            --color-gray-700: #334155;
+            --color-gray-800: #1e293b;
+            --color-gray-900: #0f172a;
+            
+            --color-success: #10b981;
+            --color-success-light: #d1fae5;
+            --color-warning: #f59e0b;
+            --color-warning-light: #fef3c7;
+            --color-error: #ef4444;
+            --color-error-light: #fee2e2;
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+        }
+
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: var(--color-gray-50);
+            color: var(--color-gray-900);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography System */
+        .text-xs { font-size: 0.75rem; line-height: 1rem; }
+        .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+        .text-base { font-size: 1rem; line-height: 1.5rem; }
+        .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+        .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+        .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+
+        .font-light { font-weight: 300; }
+        .font-normal { font-weight: 400; }
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+
+        /* Layout Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--spacing-md);
+            }
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: var(--color-white);
+            padding: var(--spacing-2xl);
+            border-radius: var(--radius-xl);
+            margin-bottom: var(--spacing-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            opacity: 0.1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: -0.025em;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-lg);
+            margin-top: var(--spacing-md);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: var(--spacing-xl);
+                text-align: center;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Card System */
+        .card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .card-body {
+            padding: var(--spacing-lg);
+        }
+
+        .card-footer {
+            padding: var(--spacing-lg);
+            border-top: 1px solid var(--color-gray-200);
+            background: var(--color-gray-50);
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            gap: var(--spacing-lg);
+        }
+
+        .grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+        @media (max-width: 1200px) {
+            .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+            .grid-cols-3 { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .grid-cols-4,
+            .grid-cols-3,
+            .grid-cols-2 { 
+                grid-template-columns: 1fr; 
+            }
+        }
+
+        /* Stat Cards */
+        .stat-card {
+            text-align: center;
+            padding: var(--spacing-xl);
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-gray-200);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stat-card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-primary);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            color: var(--color-white);
+            font-size: 1.5rem;
+        }
+
+        .stat-card-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-xs);
+            line-height: 1;
+        }
+
+        .stat-card-label {
+            color: var(--color-gray-600);
+            font-weight: 500;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-card-trend {
+            margin-top: var(--spacing-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .trend-up { color: var(--color-success); }
+        .trend-down { color: var(--color-error); }
+        .trend-neutral { color: var(--color-gray-500); }
+
+        /* Status Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-success {
+            background: var(--color-success-light);
+            color: var(--color-success);
+        }
+
+        .badge-warning {
+            background: var(--color-warning-light);
+            color: var(--color-warning);
+        }
+
+        .badge-error {
+            background: var(--color-error-light);
+            color: var(--color-error);
+        }
+
+        .badge-secondary {
+            background: var(--color-gray-200);
+            color: var(--color-gray-700);
+        }
+
+        /* Loading States */
+        .loading-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            flex-direction: column;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--color-gray-200);
+            border-top: 4px solid var(--color-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: var(--spacing-md);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: var(--color-gray-600);
+            font-weight: 500;
+        }
+
+        /* Error States */
+        .error-container {
+            background: var(--color-error-light);
+            border: 1px solid var(--color-error);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            text-align: center;
+            color: var(--color-error);
+        }
+
+        .error-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .error-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .error-message {
+            color: var(--color-gray-700);
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+
+        .mb-0 { margin-bottom: 0; }
+        .mb-1 { margin-bottom: var(--spacing-xs); }
+        .mb-2 { margin-bottom: var(--spacing-sm); }
+        .mb-3 { margin-bottom: var(--spacing-md); }
+        .mb-4 { margin-bottom: var(--spacing-lg); }
+        .mb-5 { margin-bottom: var(--spacing-xl); }
+        .mb-6 { margin-bottom: var(--spacing-2xl); }
+
+        .mt-0 { margin-top: 0; }
+        .mt-1 { margin-top: var(--spacing-xs); }
+        .mt-2 { margin-top: var(--spacing-sm); }
+        .mt-3 { margin-top: var(--spacing-md); }
+        .mt-4 { margin-top: var(--spacing-lg); }
+        .mt-5 { margin-top: var(--spacing-xl); }
+        .mt-6 { margin-top: var(--spacing-2xl); }
+
+        .hidden { display: none; }
+        .block { display: block; }
+        .flex { display: flex; }
+        .inline-flex { display: inline-flex; }
+
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+
+        /* Responsive utilities */
+        @media (max-width: 768px) {
+            .hidden-mobile { display: none; }
+            .block-mobile { display: block; }
+        }
+
+        @media (min-width: 769px) {
+            .hidden-desktop { display: none; }
+            .block-desktop { display: block; }
+        }
+         
+        /* Interactive Charts Styles */
+        .charts-section {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-gray-200);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            padding: var(--spacing-lg);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .chart-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+        }
+
+        .chart-controls {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .chart-toggle {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: 1px solid var(--color-gray-300);
+            border-radius: var(--radius-sm);
+            background: var(--color-white);
+            color: var(--color-gray-700);
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .chart-toggle.active,
+        .chart-toggle:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+
+        /* SVG Chart Styles */
+        .svg-chart {
+            width: 100%;
+            height: 100%;
+        }
+
+        .chart-line {
+            fill: none;
+            stroke: var(--color-primary);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .chart-area {
+            fill: var(--color-primary);
+            fill-opacity: 0.1;
+        }
+
+        .chart-point {
+            fill: var(--color-primary);
+            stroke: var(--color-white);
+            stroke-width: 2;
+            cursor: pointer;
+            transition: r 0.2s ease;
+        }
+
+        .chart-point:hover {
+            r: 6;
+            fill: var(--color-primary-dark);
+        }
+
+        .chart-grid {
+            stroke: var(--color-gray-200);
+            stroke-width: 1;
+        }
+
+        .chart-axis {
+            stroke: var(--color-gray-300);
+            stroke-width: 1;
+        }
+
+        .chart-label {
+            font-size: 0.75rem;
+            fill: var(--color-gray-600);
+            font-family: inherit;
+        }
+
+        /* Coverage Visualization */
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .coverage-card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-gray-200);
+            padding: var(--spacing-lg);
+            transition: all 0.3s ease;
+        }
+
+        .coverage-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .coverage-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .coverage-type {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-weight: 600;
+            color: var(--color-gray-900);
+        }
+
+        .coverage-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+        }
+
+        .coverage-percentage {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .coverage-progress {
+            width: 100%;
+            height: 8px;
+            background: var(--color-gray-200);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .coverage-fill {
+            height: 100%;
+            border-radius: var(--radius-sm);
+            transition: width 0.8s ease-in-out;
+            position: relative;
+        }
+
+        .coverage-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .coverage-high { background: linear-gradient(90deg, var(--color-success), #16a34a); }
+        .coverage-medium { background: linear-gradient(90deg, var(--color-warning), #eab308); }
+        .coverage-low { background: linear-gradient(90deg, var(--color-error), #dc2626); }
+
+        .coverage-details {
+            font-size: 0.75rem;
+            color: var(--color-gray-600);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Branch Performance Cards */
+        .branch-performance {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .performance-card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-gray-200);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .performance-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .performance-header {
+            background: linear-gradient(135deg, var(--color-gray-50), var(--color-gray-100));
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .branch-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .branch-name-large {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: var(--spacing-sm);
+            background: var(--color-white);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .metric-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .performance-chart {
+            padding: var(--spacing-lg);
+            height: 150px;
+            position: relative;
+        }
+
+        /* Mini Charts */
+        .mini-chart {
+            width: 100%;
+            height: 60px;
+        }
+
+        .mini-chart-line {
+            fill: none;
+            stroke: var(--color-primary);
+            stroke-width: 1.5;
+            opacity: 0.8;
+        }
+
+        .mini-chart-area {
+            fill: var(--color-primary);
+            fill-opacity: 0.1;
+        }
+
+        /* Status Indicators Enhanced */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .status-success .status-pulse { background: var(--color-success); }
+        .status-failed .status-pulse { background: var(--color-error); }
+        .status-warning .status-pulse { background: var(--color-warning); }
+
+        /* Interactive Tooltips */
+        .tooltip {
+            position: absolute;
+            background: var(--color-gray-900);
+            color: var(--color-white);
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 4px solid transparent;
+            border-top-color: var(--color-gray-900);
+        }
+
+        /* Responsive adjustments for Step 2 */
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 250px;
+                padding: var(--spacing-md);
+            }
+            
+            .chart-controls {
+                flex-direction: column;
+                gap: var(--spacing-xs);
+            }
+            
+            .performance-metrics {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-xs);
+            }
+            
+            .coverage-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Step 3: Filter Controls Styling */
+input[type="text"],
+input[type="date"],
+select {
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-sm);
+    font-size: 0.875rem;
+    color: var(--color-gray-800);
+    background-color: var(--color-white);
+    transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: var(--color-primary);
+    outline: none;
+}
+
+.chart-toggle {
+    background: var(--color-gray-100);
+    border: 1px solid var(--color-gray-300);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--color-gray-800);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.chart-toggle:hover,
+.chart-toggle.active {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+.branch-detail {
+    margin-top: var(--spacing-sm);
+}
+
+.branch-detail table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.branch-detail th,
+.branch-detail td {
+    border-bottom: 1px solid var(--color-gray-200);
+    padding: var(--spacing-xs);
+}
+
+.branch-detail pre {
+    max-height: 80px;
+    overflow-y: auto;
+    background: var(--color-error-light);
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+}
+.branch-loading {
+    padding: var(--spacing-md);
+    text-align: center;
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+
+/* Step 5: Mobile Optimizations and Polish */
+@media (max-width: 768px) {
+    /* Make filter/search inputs stack vertically on mobile */
+    .grid-cols-4,
+    .grid-cols-3,
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .card-body > .grid {
+        grid-template-columns: 1fr !important;
+        gap: var(--spacing-sm);
+    }
+
+    .chart-controls {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    .branch-detail table thead {
+        display: none; /* Hide table headers on mobile for simplicity */
+    }
+
+    .branch-detail table tbody tr {
+        display: block;
+        margin-bottom: var(--spacing-sm);
+        border-bottom: 1px solid var(--color-gray-200);
+    }
+
+    .branch-detail table tbody td {
+        display: block;
+        padding: var(--spacing-xs);
+        font-size: 0.8rem;
+    }
+
+    .performance-card {
+        padding: var(--spacing-md);
+    }
+
+    .stat-card {
+        padding: var(--spacing-lg);
+    }
+}
+
+/* Step 5: Smooth hover transitions for cards and buttons */
+.card,
+.chart-toggle,
+.stat-card,
+.performance-card,
+.coverage-card {
+    transition: all 0.2s ease-in-out;
+}
+
+.card:hover,
+.stat-card:hover,
+.performance-card:hover,
+.coverage-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Step 5: Button focus styles */
+.chart-toggle:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+
+
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-content">
+                <h1>📱 FITHSCS Mobile App</h1>
+                <p>Professional Test Reports Dashboard</p>
+                <div class="header-badge">
+                    <span>🚀 Continuous Integration & Testing</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loading State -->
+        <div id="loading" class="loading-container">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading test reports and analytics...</div>
+        </div>
+        
+        <!-- Error State -->
+        <div id="error" class="error-container hidden">
+            <div class="error-icon">⚠️</div>
+            <div class="error-title">Unable to Load Test Reports</div>
+            <div class="error-message">
+                Please check if the index.json file exists and is accessible.
+                <br>The dashboard will automatically retry in 30 seconds.
+            </div>
+        </div>
+        
+        <!-- Main Dashboard Content -->
+        <div id="dashboard" class="hidden">
+            <!-- KPI Stats Grid -->
+            <div class="grid grid-cols-4 mb-6">
+                <div class="stat-card">
+                    <div class="stat-card-icon">📊</div>
+                    <div class="stat-card-value" id="total-runs">0</div>
+                    <div class="stat-card-label">Total Test Runs</div>
+                    <div class="stat-card-trend trend-neutral">
+                        <span id="runs-trend">No trend data</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-card-icon">🌿</div>
+                    <div class="stat-card-value" id="total-branches">0</div>
+                    <div class="stat-card-label">Active Branches</div>
+                    <div class="stat-card-trend trend-neutral">
+                        <span id="branches-trend">Tracking all branches</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-card-icon">✅</div>
+                    <div class="stat-card-value" id="success-rate">0%</div>
+                    <div class="stat-card-label">Success Rate</div>
+                    <div class="stat-card-trend" id="success-trend">
+                        <span>Calculating...</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-card-icon">🕒</div>
+                    <div class="stat-card-value" id="last-updated">-</div>
+                    <div class="stat-card-label">Last Updated</div>
+                    <div class="stat-card-trend trend-neutral">
+                        <span id="update-time">Just now</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Rate Trend Chart -->
+    <div class="charts-section">
+        <div class="card-header">
+            <div class="chart-header">
+                <h2 class="chart-title">📈 Success Rate Trends</h2>
+                <div class="chart-controls">
+                    <button class="chart-toggle active" data-period="7d">7 Days</button>
+                    <button class="chart-toggle" data-period="30d">30 Days</button>
+                    <button class="chart-toggle" data-period="90d">90 Days</button>
+                </div>
+            </div>
+        </div>
+        <div class="chart-container">
+            <svg class="svg-chart" id="success-trend-chart">
+                <!-- Chart will be generated by JavaScript -->
+            </svg>
+        </div>
+    </div>
+
+    <!-- Coverage Visualization Grid -->
+    <div class="coverage-grid" id="coverage-grid">
+        <!-- Coverage cards will be generated by JavaScript -->
+    </div>
+
+    <!-- Branch Performance Section -->
+    <div class="branch-performance" id="branch-performance">
+        <!-- Performance cards will be generated by JavaScript -->
+    </div>
+    <!-- Template for Branch Detail Expansion -->
+<div class="branch-detail hidden" id="branch-details-{branchName}">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="text-lg font-semibold">Test Runs for {branchName}</h3>
+        </div>
+        <div class="card-body">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr>
+                        <th class="text-left p-2">Run #</th>
+                        <th class="text-left p-2">Status</th>
+                        <th class="text-left p-2">Date</th>
+                        <th class="text-left p-2">Duration</th>
+                        <th class="text-left p-2">Error (if any)</th>
+                    </tr>
+                </thead>
+                <tbody id="branch-run-list-{branchName}">
+                    <!-- Individual runs for this branch will be populated via JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+            
+            <!-- Placeholder for upcoming sections -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-semibold text-gray-900">📈 Advanced Analytics Coming Next</h2>
+                </div>
+                <div class="card-body">
+                    <p class="text-gray-600">Step 2 will add interactive charts, branch performance metrics, and detailed test analytics.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Advanced Filters & Search -->
+<div class="card mb-6">
+  <div class="card-header">
+    <h2 class="text-xl font-semibold text-gray-900">🔍 Filters & Search</h2>
+  </div>
+  <div class="card-body">
+    <div class="grid grid-cols-4 gap-4 mb-4">
+      <input type="text" id="search-input" placeholder="Search branch, commit, or test..." class="block w-full border rounded p-2" />
+
+      <select id="status-filter" class="block w-full border rounded p-2">
+        <option value="">All Status</option>
+        <option value="success">✅ Success</option>
+        <option value="failed">❌ Failed</option>
+        <option value="warning">⚠️ Warning</option>
+      </select>
+
+      <input type="date" id="start-date" class="block w-full border rounded p-2" />
+      <input type="date" id="end-date" class="block w-full border rounded p-2" />
+    </div>
+
+    <div class="flex gap-2 mb-2">
+      <button id="filter-apply" class="chart-toggle">Apply Filters</button>
+      <button id="filter-reset" class="chart-toggle">Reset</button>
+
+      <select id="sort-order" class="block border rounded p-2">
+        <option value="date-desc">Sort by Date ↓</option>
+        <option value="date-asc">Sort by Date ↑</option>
+        <option value="success-rate-desc">Success Rate ↓</option>
+        <option value="success-rate-asc">Success Rate ↑</option>
+        <option value="coverage-desc">Coverage ↓</option>
+        <option value="coverage-asc">Coverage ↑</option>
+      </select>
+    </div>
+
+    <div class="flex gap-2">
+      <button class="chart-toggle" onclick="applyPreset('failed')">Failed Tests Only</button>
+      <button class="chart-toggle" onclick="applyPreset('low-coverage')">Low Coverage</button>
+      <button class="chart-toggle" onclick="applyPreset('recent')">Recent Activity</button>
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <script>
+        // Enhanced dashboard loading with better error handling
+        async function loadDashboard() {
+            const loadingEl = document.getElementById('loading');
+            const errorEl = document.getElementById('error');
+            const dashboardEl = document.getElementById('dashboard');
+            
+            try {
+                // Show loading state
+                loadingEl.style.display = 'flex';
+                errorEl.classList.add('hidden');
+                dashboardEl.classList.add('hidden');
+                
+                const response = await fetch('./index.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                window.dashboardData = data;
+                
+                // Hide loading and show dashboard
+                loadingEl.style.display = 'none';
+                dashboardEl.classList.remove('hidden');
+                
+                // Update KPI stats with enhanced calculations
+                updateKPIStats(data);
+                
+                console.log('Dashboard loaded successfully:', data);
+                
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                
+                // Show error state
+                loadingEl.style.display = 'none';
+                errorEl.classList.remove('hidden');
+                
+                // Auto-retry after 30 seconds
+                setTimeout(loadDashboard, 30000);
+            }
+        }
+        
+        function updateKPIStats(data) {
+            // Total runs
+            document.getElementById('total-runs').textContent = data.stats?.totalRuns || 0;
+            
+            // Total branches
+            document.getElementById('total-branches').textContent = data.stats?.totalBranches || 0;
+            
+            // Success rate with trend
+            const successRate = Math.round(data.stats?.successRate || 0);
+            document.getElementById('success-rate').textContent = successRate + '%';
+            
+            const successTrendEl = document.getElementById('success-trend');
+            if (successRate >= 90) {
+                successTrendEl.className = 'stat-card-trend trend-up';
+                successTrendEl.innerHTML = '<span>🎯 Excellent performance</span>';
+            } else if (successRate >= 70) {
+                successTrendEl.className = 'stat-card-trend trend-neutral';
+                successTrendEl.innerHTML = '<span>📈 Good performance</span>';
+            } else {
+                successTrendEl.className = 'stat-card-trend trend-down';
+                successTrendEl.innerHTML = '<span>⚠️ Needs attention</span>';
+            }
+            
+            // Last updated with relative time
+            if (data.generated) {
+                const lastUpdate = new Date(data.generated);
+                const now = new Date();
+                const diffMinutes = Math.floor((now - lastUpdate) / (1000 * 60));
+                
+                document.getElementById('last-updated').textContent = lastUpdate.toLocaleDateString();
+                
+                let timeText;
+                if (diffMinutes < 1) {
+                    timeText = 'Just now';
+                } else if (diffMinutes < 60) {
+                    timeText = `${diffMinutes} min ago`;
+                } else if (diffMinutes < 1440) {
+                    timeText = `${Math.floor(diffMinutes / 60)} hours ago`;
+                } else {
+                    timeText = `${Math.floor(diffMinutes / 1440)} days ago`;
+                }
+                
+                document.getElementById('update-time').textContent = timeText;
+            }
+        }
+        
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', loadDashboard);
+        
+        // Auto-refresh every 2 minutes
+        setInterval(loadDashboard, 120000);
+        
+        // Add visibility change listener to refresh when tab becomes active
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                loadDashboard();
+            }
+        });
+       
+        // Add these functions to your existing JavaScript
+
+        // Enhanced data processing for visualizations
+        function processDataForCharts(data) {
+            const branches = data.branches || {};
+            const chartData = {
+                successTrends: [],
+                coverageMetrics: {},
+                branchPerformance: {}
+            };
+
+            // Process each branch for trends and metrics
+            Object.entries(branches).forEach(([branchName, branchData]) => {
+                const runs = branchData.runs || [];
+                
+                // Success trend data (last 30 runs)
+                const recentRuns = runs.slice(0, 30).reverse();
+                chartData.successTrends.push({
+                    branch: branchName,
+                    points: recentRuns.map((run, index) => ({
+                        x: index,
+                        y: run.status === 'success' ? 100 : 0,
+                        run: run.runNumber,
+                        date: run.timestamp
+                    }))
+                });
+
+                // Coverage metrics
+                const latestRun = runs[0];
+                if (latestRun && latestRun.coverage) {
+                    chartData.coverageMetrics[branchName] = latestRun.coverage;
+                }
+
+                // Branch performance summary
+                chartData.branchPerformance[branchName] = {
+                    totalRuns: branchData.totalRuns,
+                    successfulRuns: branchData.successfulRuns,
+                    successRate: branchData.totalRuns > 0 ? 
+                        (branchData.successfulRuns / branchData.totalRuns * 100) : 0,
+                    latestRun: latestRun,
+                    trend: calculateTrend(runs.slice(0, 10))
+                };
+            });
+
+            return chartData;
+        }
+
+        function calculateTrend(runs) {
+            if (runs.length < 2) return 'stable';
+            
+            const recent = runs.slice(0, 5);
+            const older = runs.slice(5, 10);
+            
+            const recentSuccess = recent.filter(r => r.status === 'success').length / recent.length;
+            const olderSuccess = older.filter(r => r.status === 'success').length / Math.max(older.length, 1);
+            
+            if (recentSuccess > olderSuccess + 0.1) return 'improving';
+            if (recentSuccess < olderSuccess - 0.1) return 'declining';
+            return 'stable';
+        }
+
+        // Render success trend chart
+        function renderSuccessTrendChart(data) {
+            const svg = document.getElementById('success-trend-chart');
+            svg.innerHTML = '';
+
+            const width = svg.clientWidth || 600;
+            const height = svg.clientHeight || 200;
+            const margin = { top: 20, right: 20, bottom: 40, left: 40 };
+            const chartWidth = width - margin.left - margin.right;
+            const chartHeight = height - margin.top - margin.bottom;
+
+            // Combine all branch data for overall trend
+            const allPoints = [];
+            Object.values(data.branches || {}).forEach((branch, branchIndex) => {
+                const runs = branch.runs || [];
+                runs.slice(0, 20).forEach((run, index) => {
+                    allPoints.push({
+                        x: runs.length - index - 1,
+                        y: run.status === 'success' ? 100 : 0,
+                        run: run.runNumber,
+                        branch: Object.keys(data.branches)[branchIndex]
+                    });
+                });
+            });
+
+            if (allPoints.length === 0) return;
+
+            // Sort by x position
+            allPoints.sort((a, b) => a.x - b.x);
+
+            // Create scales
+            const maxX = Math.max(...allPoints.map(p => p.x));
+            const xScale = (x) => (x / Math.max(maxX, 1)) * chartWidth;
+            const yScale = (y) => chartHeight - (y / 100) * chartHeight;
+
+            // Create SVG elements
+            svg.innerHTML = `
+                <defs>
+                    <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--color-primary);stop-opacity:0.3" />
+                        <stop offset="100%" style="stop-color:var(--color-primary);stop-opacity:0.1" />
+                    </linearGradient>
+                </defs>
+                <g transform="translate(${margin.left},${margin.top})">
+                    <!-- Grid lines -->
+                    ${[0, 25, 50, 75, 100].map(y => 
+                        `<line class="chart-grid" x1="0" y1="${yScale(y)}" x2="${chartWidth}" y2="${yScale(y)}"/>`
+                    ).join('')}
+                    
+                    <!-- Axes -->
+                    <line class="chart-axis" x1="0" y1="${chartHeight}" x2="${chartWidth}" y2="${chartHeight}"/>
+                    <line class="chart-axis" x1="0" y1="0" x2="0" y2="${chartHeight}"/>
+                    
+                    <!-- Y-axis labels -->
+                    ${[0, 25, 50, 75, 100].map(y => 
+                        `<text class="chart-label" x="-10" y="${yScale(y) + 4}" text-anchor="end">${y}%</text>`
+                    ).join('')}
+                    
+                    <!-- Data area -->
+                    <path class="chart-area" d="M0,${chartHeight} ${allPoints.map((p, i) => 
+                        `L${xScale(p.x)},${yScale(p.y)}`
+                    ).join(' ')} L${chartWidth},${chartHeight} Z" fill="url(#areaGradient)"/>
+                    
+                    <!-- Data line -->
+                    <path class="chart-line" d="M${allPoints.map((p, i) => 
+                        `${xScale(p.x)},${yScale(p.y)}`
+                    ).join(' L')}" />
+                    
+                    <!-- Data points -->
+                    ${allPoints.map(p => 
+                        `<circle class="chart-point" cx="${xScale(p.x)}" cy="${yScale(p.y)}" r="3" 
+                         data-run="${p.run}" data-branch="${p.branch}" data-success="${p.y}"/>`
+                    ).join('')}
+                </g>
+            `;
+
+            // Add interactivity
+            addChartInteractivity(svg);
+        }
+
+        // Render coverage visualization
+        function renderCoverageCards(data) {
+            const container = document.getElementById('coverage-grid');
+            if (!container) return;
+
+            const branches = data.branches || {};
+            const coverageTypes = ['lines', 'functions', 'branches', 'statements'];
+            const typeIcons = {
+                lines: '📝',
+                functions: '⚡',
+                branches: '🌿',
+                statements: '📋'
+            };
+
+            // Calculate overall coverage metrics
+            const overallCoverage = {};
+            coverageTypes.forEach(type => {
+                const values = Object.values(branches)
+                    .filter(b => b.latestRun && b.latestRun.coverage)
+                    .map(b => b.latestRun.coverage[type] || 0);
+                
+                overallCoverage[type] = values.length > 0 ? 
+                    Math.round(values.reduce((a, b) => a + b, 0) / values.length) : 0;
+            });
+
+            container.innerHTML = coverageTypes.map(type => {
+                const percentage = overallCoverage[type];
+                const coverageClass = percentage >= 80 ? 'coverage-high' : 
+                                    percentage >= 60 ? 'coverage-medium' : 'coverage-low';
+
+                return `
+                    <div class="coverage-card">
+                        <div class="coverage-header">
+                            <div class="coverage-type">
+                                <div class="coverage-icon" style="background: var(--color-primary-light); color: white;">
+                                    ${typeIcons[type]}
+                                </div>
+                                ${type.charAt(0).toUpperCase() + type.slice(1)} Coverage
+                            </div>
+                            <div class="coverage-percentage">${percentage}%</div>
+                        </div>
+                        <div class="coverage-progress">
+                            <div class="coverage-fill ${coverageClass}" style="width: ${percentage}%"></div>
+                        </div>
+                        <div class="coverage-details">
+                            <span>Target: 80%</span>
+                            <span>${percentage >= 80 ? '✅ Good' : percentage >= 60 ? '⚠️ Fair' : '❌ Low'}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render branch performance cards
+    function renderBranchPerformance(data) {
+    const container = document.getElementById('branch-performance');
+    if (!container) return;
+
+    const branches = data.branches || {};
+
+    container.innerHTML = Object.entries(branches).map(([branchName, branchData]) => {
+        const performance = {
+            totalRuns: branchData.totalRuns || 0,
+            successfulRuns: branchData.successfulRuns || 0,
+            successRate: branchData.totalRuns > 0 ? 
+                Math.round((branchData.successfulRuns / branchData.totalRuns) * 100) : 0
+        };
+
+        const latestRun = branchData.latestRun;
+        const statusClass = latestRun?.status === 'success' ? 'status-success' : 
+                          latestRun?.status === 'failed' ? 'status-failed' : 'status-warning';
+
+        const trendIcon = performance.successRate >= 90 ? '📈' : 
+                        performance.successRate >= 70 ? '📊' : '📉';
+
+        const recentRuns = (branchData.runs || []).slice(0, 10).reverse();
+        const miniChartPoints = recentRuns.map((run, index) => ({
+            x: index * 30,
+            y: run.status === 'success' ? 20 : 40
+        }));
+
+        // Branch card + expandable section
+        return `
+            <div class="performance-card mb-2 cursor-pointer" onclick="toggleBranchDetails('${branchName}')">
+                <div class="performance-header">
+                    <div class="branch-title">
+                        <div class="branch-name-large">
+                            🌿 ${branchName}
+                            <div class="status-indicator ${statusClass}">
+                                <div class="status-pulse"></div>
+                                ${(latestRun?.status || 'unknown').toUpperCase()}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="performance-metrics">
+                        <div class="metric-item">
+                            <div class="metric-value">${performance.totalRuns}</div>
+                            <div class="metric-label">Total Runs</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">${performance.successRate}%</div>
+                            <div class="metric-label">Success Rate</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">${trendIcon}</div>
+                            <div class="metric-label">Trend</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="performance-chart">
+                    <svg class="mini-chart" viewBox="0 0 300 60">
+                        ${miniChartPoints.length > 1 ? `
+                            <path class="mini-chart-area" d="M0,60 ${miniChartPoints.map(p => `L${p.x},${p.y}`).join(' ')} L270,60 Z"/>
+                            <path class="mini-chart-line" d="M${miniChartPoints.map(p => `${p.x},${p.y}`).join(' L')}"/>
+                        ` : '<text x="150" y="30" text-anchor="middle" class="chart-label">No trend data</text>'}
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Expandable Branch Details -->
+            <div class="branch-detail hidden" id="branch-details-${branchName}">
+<div class="card mb-4">
+    <div class="card-header">
+        <h3 class="text-lg font-semibold">Test Runs for ${branchName}</h3>
+    </div>
+    <div class="card-body" id="branch-body-${branchName}">
+        <div class="branch-loading text-gray-500">Loading test runs...</div>
+
+        <table class="w-full text-sm hidden">
+            <thead>
+                <tr>
+                    <th class="text-left p-2">Run #</th>
+                    <th class="text-left p-2">Status</th>
+                    <th class="text-left p-2">Date</th>
+                    <th class="text-left p-2">Duration</th>
+                    <th class="text-left p-2">Error (if any)</th>
+                </tr>
+            </thead>
+            <tbody id="branch-run-list-${branchName}">
+                <!-- Run rows populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+            </div>
+        `;
+    }).join('');
+
+    // Now populate details for each branch
+//     Object.entries(branches).forEach(([branchName, branchData]) => {
+//         renderBranchDetails(branchName, branchData);
+//     });
+// }
+
+        // Add chart interactivity
+        function addChartInteractivity(svg) {
+            const tooltip = createTooltip();
+            const points = svg.querySelectorAll('.chart-point');
+
+            points.forEach(point => {
+                point.addEventListener('mouseenter', (e) => {
+                    const run = e.target.dataset.run;
+                    const branch = e.target.dataset.branch;
+                    const success = e.target.dataset.success;
+                    
+                    tooltip.innerHTML = `
+                        <strong>Run #${run}</strong><br>
+                        Branch: ${branch}<br>
+                        Status: ${success === '100' ? 'Success' : 'Failed'}
+                    `;
+                    
+                    const rect = e.target.getBoundingClientRect();
+                    tooltip.style.left = rect.left + 'px';
+                    tooltip.style.top = (rect.top - 60) + 'px';
+                    tooltip.classList.add('visible');
+                });
+
+                point.addEventListener('mouseleave', () => {
+                    tooltip.classList.remove('visible');
+                });
+            });
+        }
+
+        function createTooltip() {
+            let tooltip = document.querySelector('.tooltip');
+            if (!tooltip) {
+                tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                document.body.appendChild(tooltip);
+            }
+            return tooltip;
+        }
+
+        // Update the main updateKPIStats function to include new visualizations
+        function updateKPIStats(data) {
+            // ... existing KPI update code ...
+
+            // Add new Step 2 visualizations
+            renderSuccessTrendChart(data);
+            renderCoverageCards(data);
+            renderBranchPerformance(data);
+        }
+
+        // Chart control handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.chart-toggle').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from siblings
+                    this.parentNode.querySelectorAll('.chart-toggle').forEach(btn => 
+                        btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Re-render chart with new period (implementation depends on data availability)
+                    const period = this.dataset.period;
+                    console.log('Chart period changed to:', period);
+                });
+            });
+        });
+
+        document.getElementById('filter-apply').addEventListener('click', applyFilters);
+document.getElementById('filter-reset').addEventListener('click', resetFilters);
+
+function applyFilters() {
+  const search = document.getElementById('search-input').value.toLowerCase();
+  const status = document.getElementById('status-filter').value;
+  const startDate = document.getElementById('start-date').value;
+  const endDate = document.getElementById('end-date').value;
+  const sort = document.getElementById('sort-order').value;
+
+  console.log('Applying filters:', { search, status, startDate, endDate, sort });
+  
+  // 👉 Later: Filter your branch and test rendering logic based on these
+}
+
+function resetFilters() {
+  document.getElementById('search-input').value = '';
+  document.getElementById('status-filter').value = '';
+  document.getElementById('start-date').value = '';
+  document.getElementById('end-date').value = '';
+  document.getElementById('sort-order').value = 'date-desc';
+  console.log('Filters reset');
+}
+
+function applyPreset(preset) {
+  if (preset === 'failed') {
+    document.getElementById('status-filter').value = 'failed';
+  } else if (preset === 'low-coverage') {
+    document.getElementById('sort-order').value = 'coverage-asc';
+  } else if (preset === 'recent') {
+    document.getElementById('sort-order').value = 'date-desc';
+  }
+  applyFilters();
+}
+function toggleBranchDetails(branchName) {
+    const section = document.getElementById(`branch-details-${branchName}`);
+    if (!section) return;
+
+    const alreadyRendered = section.getAttribute('data-rendered');
+    
+    if (!alreadyRendered) {
+        const branchData = window.dashboardData?.branches?.[branchName];
+        const body = document.getElementById(`branch-body-${branchName}`);
+        if (branchData && body) {
+            // Show loading message
+            body.innerHTML = '<div class="branch-loading text-gray-500">Loading test runs...</div>';
+
+            // Simulate small delay for better UX (can remove in production)
+            setTimeout(() => {
+                renderBranchDetails(branchName, branchData);
+                section.setAttribute('data-rendered', 'true');
+            }, 300);  // 300ms fake load delay for effect
+        }
+    }
+
+    section.classList.toggle('hidden');
+}
+
+function renderBranchDetails(branchName, branchData) {
+    const container = document.getElementById(`branch-body-${branchName}`);
+    if (!container) return;
+
+    const runs = branchData.runs || [];
+
+    if (runs.length === 0) {
+        container.innerHTML = '<div class="text-gray-500">No test runs available for this branch.</div>';
+        return;
+    }
+
+    container.innerHTML = `
+        <table class="w-full text-sm">
+            <thead>
+                <tr>
+                    <th class="text-left p-2">Run #</th>
+                    <th class="text-left p-2">Status</th>
+                    <th class="text-left p-2">Date</th>
+                    <th class="text-left p-2">Duration</th>
+                    <th class="text-left p-2">Error (if any)</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${runs.map(run => {
+                    const statusBadge = run.status === 'success' ? '✅' : 
+                                        run.status === 'failed' ? '❌' : '⚠️';
+                    return `
+                        <tr>
+                            <td class="p-2">#${run.runNumber}</td>
+                            <td class="p-2">${statusBadge} ${run.status}</td>
+                            <td class="p-2">${new Date(run.timestamp).toLocaleString()}</td>
+                            <td class="p-2">${run.duration || 'N/A'}s</td>
+                            <td class="p-2">${run.error ? `<pre class="text-red-600 overflow-x-auto">${run.error}</pre>` : '-'}</td>
+                        </tr>
+                    `;
+                }).join('')}
+            </tbody>
+        </table>
+    `;
+}
+
+
+   // Back to Top button visibility
+window.addEventListener('scroll', function() {
+    const btn = document.getElementById('back-to-top');
+    if (window.scrollY > 300) {
+        btn.style.display = 'block';
+    } else {
+        btn.style.display = 'none';
+    }
+});
+
+document.getElementById('back-to-top').addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+    
+    </script>
+    <button id="back-to-top" class="chart-toggle" style="position: fixed; bottom: 20px; right: 20px; display: none;">
+    ↑ Top
+</button>
+
+</body>
+</html>
