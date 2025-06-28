@@ -1,27 +1,34 @@
 {
-  "generated": "2025-06-28T18:07:05Z",
+  "generated": "2025-06-28T19:35:37.708Z",
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "51",
-    "branch": "main",
-    "commit": "6a00228c12283344fad63aba16aa4a84497f8b76",
-    "shortCommit": "6a00228",
+    "runNumber": "56",
+    "branch": "46/merge",
+    "commit": "7e951059778424672ff96c00de31675b515e42ea",
+    "shortCommit": "7e95105",
     "actor": "brukGit",
-    "timestamp": "2025-06-28T18:07:05Z",
+    "timestamp": "2025-06-28T19:35:37.708Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/15946805257"
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/15947500860"
   },
   "stats": {
-    "totalRuns": 51,
-    "totalBranches": 3,
-    "successRate": 87.5
+    "totalRuns": 56,
+    "totalBranches": 6,
+    "successRate": 89.3
   },
   "branches": {
     "main": {
-      "totalRuns": 35,
-      "successfulRuns": 32,
+      "totalRuns": 36,
+      "successfulRuns": 33,
       "runs": [
+        {
+          "runNumber": "54",
+          "status": "success",
+          "timestamp": "2025-06-28T19:24:31.455Z",
+          "duration": 43,
+          "error": null
+        },
         {
           "runNumber": "51",
           "status": "success",
@@ -142,6 +149,52 @@
           "timestamp": "2025-06-27T11:20:45Z",
           "duration": 28,
           "error": "Test timeout: Login flow test exceeded 30 seconds"
+        }
+      ]
+    },
+    "left": {
+      "totalRuns": 2,
+      "successfulRuns": 2,
+      "runs": [
+        {
+          "runNumber": "55",
+          "status": "success",
+          "timestamp": "2025-06-28T19:34:48.823Z",
+          "duration": 68,
+          "error": null
+        },
+        {
+          "runNumber": "52",
+          "status": "success",
+          "timestamp": "2025-06-28T19:23:27.807Z",
+          "duration": 58,
+          "error": null
+        }
+      ]
+    },
+    "45/merge": {
+      "totalRuns": 1,
+      "successfulRuns": 1,
+      "runs": [
+        {
+          "runNumber": "53",
+          "status": "success",
+          "timestamp": "2025-06-28T19:23:53.644Z",
+          "duration": 71,
+          "error": null
+        }
+      ]
+    },
+    "46/merge": {
+      "totalRuns": 1,
+      "successfulRuns": 1,
+      "runs": [
+        {
+          "runNumber": "56",
+          "status": "success",
+          "timestamp": "2025-06-28T19:35:37.705Z",
+          "duration": 62,
+          "error": null
         }
       ]
     }
