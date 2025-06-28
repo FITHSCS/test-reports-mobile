@@ -1,538 +1,1069 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FITHSCS Mobile App - Test Reports Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="project-info">
-                    <h1>FITHSCS Mobile App</h1>
-                    <p class="project-subtitle">React Native • Expo • Test Benchmarks Dashboard</p>
-                </div>
-                <div class="header-meta">
-                    <p id="last-updated" class="last-updated"></p>
-                    <a id="repo-link" class="repo-link" href="#" target="_blank">
-                        View Repository →
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
+/* CSS Custom Properties for consistent theming */
+:root {
+    --color-primary: #2563eb;
+    --color-primary-dark: #1e40af;
+    --color-primary-light: #3b82f6;
+    --color-secondary: #64748b;
+    --color-accent: #0ea5e9;
 
-    <main class="container">
-        <!-- Latest Build Status - Hero Section -->
-        <section id="latest-build" class="dashboard-section hero-section">
-            <div class="latest-build-card">
-                <div class="build-status">
-                    <h2>Latest Build Status</h2>
-                    <div id="latest-build-content" class="build-content">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-                </div>
-                <div class="quick-stats">
-                    <div class="quick-stat">
-                        <span class="stat-label">Success Rate</span>
-                        <span id="quick-success-rate" class="stat-value"></span>
-                    </div>
-                    <div class="quick-stat">
-                        <span class="stat-label">Total Runs</span>
-                        <span id="quick-total-runs" class="stat-value"></span>
-                    </div>
-                    <div class="quick-stat">
-                        <span class="stat-label">Active Branches</span>
-                        <span id="quick-total-branches" class="stat-value"></span>
-                    </div>
-                </div>
-            </div>
-        </section>
+    --color-white: #ffffff;
+    --color-gray-50: #f8fafc;
+    --color-gray-100: #f1f5f9;
+    --color-gray-200: #e2e8f0;
+    --color-gray-300: #cbd5e1;
+    --color-gray-400: #94a3b8;
+    --color-gray-500: #64748b;
+    --color-gray-600: #475569;
+    --color-gray-700: #334155;
+    --color-gray-800: #1e293b;
+    --color-gray-900: #0f172a;
 
-        <!-- Main Branch Focus (Default View) -->
-        <section id="main-branch-focus" class="dashboard-section">
-            <div class="section-header">
-                <h2>Main Branch Analysis</h2>
-                <p class="section-description">Production-ready branch performance and stability metrics</p>
-            </div>
-            
-            <div class="main-branch-grid">
-                <div class="branch-summary-card">
-                    <h3>Branch Health</h3>
-                    <div id="main-branch-health" class="health-indicators">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-                
-                <div class="recent-runs-card">
-                    <h3>Recent Test Runs</h3>
-                    <div id="main-recent-runs" class="runs-timeline">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-            </div>
-        </section>
+    --color-success: #22c55e;
+    --color-fail: #ef4444;
+    --color-warning: #f59e0b;
+    --color-info: #3b82f6;
 
-        <!-- Navigation Controls -->
-        <section id="view-controls" class="dashboard-section">
-            <div class="view-toggle-container">
-                <h3>Detailed Analysis</h3>
-                <div class="view-buttons">
-                    <button id="btn-all-branches" class="view-btn" data-view="branches">
-                        All Branches Overview
-                    </button>
-                    <button id="btn-codebase-structure" class="view-btn" data-view="structure">
-                        Codebase Structure
-                    </button>
-                    <button id="btn-performance-trends" class="view-btn" data-view="trends">
-                        Performance Trends
-                    </button>
-                </div>
-            </div>
-        </section>
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
-        <!-- Detailed Views (Initially Hidden) -->
-        <section id="detailed-views" class="dashboard-section">
-            
-            <!-- All Branches View -->
-            <div id="branches-detailed-view" class="detailed-view" style="display: none;">
-                <div class="section-header">
-                    <h2>All Branches Analysis</h2>
-                    <p class="section-description">Comprehensive view of all development branches and their test performance</p>
-                </div>
-                <div id="branches-container" class="branches-grid">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
+    /* New gradient variables for enhanced design */
+    --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    --gradient-success: linear-gradient(135deg, var(--color-success) 0%, #16a34a 100%);
+    --gradient-fail: linear-gradient(135deg, var(--color-fail) 0%, #dc2626 100%);
+}
 
-            <!-- Codebase Structure View -->
-            <div id="structure-detailed-view" class="detailed-view" style="display: none;">
-                <div class="section-header">
-                    <h2>Project Architecture Overview</h2>
-                    <p class="section-description">React Native + Expo application structure and organization</p>
-                </div>
-                
-                <div class="architecture-overview">
-                    <div class="tech-stack-card">
-                        <h3>Technology Stack</h3>
-                        <div class="tech-badges">
-                            <span class="tech-badge react-native">React Native</span>
-                            <span class="tech-badge expo">Expo</span>
-                            <span class="tech-badge typescript">TypeScript</span>
-                            <span class="tech-badge redux">Redux Toolkit</span>
-                        </div>
-                    </div>
-                    
-                    <div class="folder-structure-card">
-                        <h3>Project Structure</h3>
-                        <div id="folder-structure-content" class="folder-tree">
-                            <!-- Populated by JS from both JSON and folder-structure.txt -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-            <!-- Performance Trends View -->
-            <div id="trends-detailed-view" class="detailed-view" style="display: none;">
-                <div class="section-header">
-                    <h2>Performance & Reliability Trends</h2>
-                    <p class="section-description">Historical analysis of test execution patterns and build reliability</p>
-                </div>
-                
-                <div class="trends-grid">
-                    <div class="trend-card">
-                        <h3>Success Rate Trend</h3>
-                        <div id="success-trend-chart" class="chart-container">
-                            <!-- Chart placeholder -->
-                            <p class="chart-placeholder">Success rate visualization coming soon</p>
-                        </div>
-                    </div>
-                    
-                    <div class="trend-card">
-                        <h3>Build Duration Analysis</h3>
-                        <div id="duration-trend-chart" class="chart-container">
-                            <!-- Chart placeholder -->
-                            <p class="chart-placeholder">Build duration trends coming soon</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="error-analysis-card">
-                    <h3>Common Issues & Patterns</h3>
-                    <div id="error-patterns" class="error-patterns">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-            </div>
-        </div>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--color-gray-100);
+    color: var(--color-gray-800);
+    line-height: 1.6;
+}
 
-        <!-- Consultant Insights Section -->
-        <section id="consultant-insights" class="dashboard-section">
-            <div class="insights-card">
-                <h2>Key Insights for Code Review</h2>
-                <div id="insights-content" class="insights-grid">
-                    <!-- Populated by JS with calculated insights -->
-                </div>
-            </div>
-        </section>
-    </main>
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-    <button id="back-to-top" title="Go to top">⬆️</button>
+/* Enhanced Header */
+header {
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    padding: 20px 0;
+    box-shadow: var(--shadow-lg);
+}
 
-    <script>
-        // Enhanced dashboard functionality
-        class TestDashboard {
-            constructor() {
-                this.data = null;
-                this.currentView = 'main';
-                this.init();
-            }
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
-            async init() {
-                try {
-                    await this.loadData();
-                    this.setupEventListeners();
-                    this.renderDashboard();
-                } catch (error) {
-                    console.error('Failed to initialize dashboard:', error);
-                    this.showError('Failed to load test data');
-                }
-            }
+.project-info h1 {
+    font-size: 2.2em;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
 
-            async loadData() {
-                const response = await fetch('index.json');
-                this.data = await response.json();
-            }
+.project-subtitle {
+    font-size: 0.95em;
+    color: var(--color-gray-200);
+    opacity: 0.9;
+}
 
-            setupEventListeners() {
-                // View toggle buttons
-                document.querySelectorAll('.view-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const view = e.target.dataset.view;
-                        this.switchView(view);
-                    });
-                });
+.header-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
 
-                // Back to top button
-                const backToTop = document.getElementById('back-to-top');
-                window.addEventListener('scroll', () => {
-                    backToTop.style.display = window.pageYOffset > 300 ? 'block' : 'none';
-                });
-                backToTop.addEventListener('click', () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
+.last-updated {
+    font-size: 0.85em;
+    color: var(--color-gray-200);
+    margin: 0;
+}
 
-            switchView(view) {
-                // Hide all detailed views
-                document.querySelectorAll('.detailed-view').forEach(el => {
-                    el.style.display = 'none';
-                });
+.repo-link {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 0.9em;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
 
-                // Remove active class from all buttons
-                document.querySelectorAll('.view-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
+.repo-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
 
-                // Show selected view and activate button
-                const viewElement = document.getElementById(`${view}-detailed-view`);
-                const buttonElement = document.querySelector(`[data-view="${view}"]`);
-                
-                if (viewElement) {
-                    viewElement.style.display = 'block';
-                    buttonElement.classList.add('active');
-                    this.currentView = view;
-                    
-                    // Render specific view content
-                    this.renderDetailedView(view);
-                }
-            }
+/* Dashboard Sections */
+.dashboard-section {
+    background: var(--color-white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    padding: 25px;
+    margin-bottom: 30px;
+    border: 1px solid var(--color-gray-200);
+}
 
-            renderDashboard() {
-                this.renderHeader();
-                this.renderLatestBuild();
-                this.renderMainBranchFocus();
-                this.renderConsultantInsights();
-            }
+.dashboard-section h2 {
+    color: var(--color-primary-dark);
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--color-gray-200);
+    padding-bottom: 10px;
+}
 
-            renderHeader() {
-                const lastUpdated = document.getElementById('last-updated');
-                const repoLink = document.getElementById('repo-link');
-                
-                if (this.data.generated) {
-                    const date = new Date(this.data.generated);
-                    lastUpdated.textContent = `Last updated: ${date.toLocaleString()}`;
-                }
-                
-                if (this.data.repository) {
-                    repoLink.href = this.data.repository;
-                }
-            }
+.section-header {
+    margin-bottom: 25px;
+}
 
-            renderLatestBuild() {
-                const latest = this.data.latestRun;
-                const content = document.getElementById('latest-build-content');
-                
-                const statusClass = latest.status === 'success' ? 'success' : 'failed';
-                
-                content.innerHTML = `
-                    <div class="build-info">
-                        <div class="build-status-badge ${statusClass}">
-                            ${latest.status.toUpperCase()}
-                        </div>
-                        <div class="build-details">
-                            <p><strong>Run #${latest.runNumber}</strong> on <strong>${latest.branch}</strong></p>
-                            <p>Commit: <code>${latest.shortCommit}</code> by ${latest.actor}</p>
-                            <p>${new Date(latest.timestamp).toLocaleString()}</p>
-                        </div>
-                    </div>
-                `;
+.section-description {
+    color: var(--color-gray-600);
+    font-size: 1em;
+    margin-top: 8px;
+    line-height: 1.5;
+}
 
-                // Quick stats
-                document.getElementById('quick-success-rate').textContent = `${this.data.stats.successRate}%`;
-                document.getElementById('quick-total-runs').textContent = this.data.stats.totalRuns;
-                document.getElementById('quick-total-branches').textContent = this.data.stats.totalBranches;
-            }
+/* Hero Section - Latest Build */
+.hero-section {
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    border: none;
+    box-shadow: var(--shadow-lg);
+}
 
-            renderMainBranchFocus() {
-                const mainBranch = this.data.branches.main;
-                if (!mainBranch) return;
+.hero-section h2 {
+    color: var(--color-white);
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+}
 
-                // Branch health indicators
-                const healthContainer = document.getElementById('main-branch-health');
-                const successRate = Math.round((mainBranch.successfulRuns / mainBranch.totalRuns) * 100);
-                
-                healthContainer.innerHTML = `
-                    <div class="health-indicator">
-                        <span class="health-label">Success Rate</span>
-                        <div class="health-bar">
-                            <div class="health-fill" style="width: ${successRate}%"></div>
-                        </div>
-                        <span class="health-value">${successRate}%</span>
-                    </div>
-                    <div class="health-stats">
-                        <div class="health-stat">
-                            <span class="stat-number">${mainBranch.successfulRuns}</span>
-                            <span class="stat-label">Successful</span>
-                        </div>
-                        <div class="health-stat">
-                            <span class="stat-number">${mainBranch.totalRuns - mainBranch.successfulRuns}</span>
-                            <span class="stat-label">Failed</span>
-                        </div>
-                    </div>
-                `;
+.latest-build-card {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
 
-                // Recent runs timeline
-                const runsContainer = document.getElementById('main-recent-runs');
-                const recentRuns = mainBranch.runs.slice(0, 5);
-                
-                runsContainer.innerHTML = recentRuns.map(run => `
-                    <div class="run-item ${run.status}">
-                        <div class="run-status"></div>
-                        <div class="run-details">
-                            <span class="run-number"># ${run.runNumber}</span>
-                            <span class="run-time">${new Date(run.timestamp).toLocaleDateString()}</span>
-                            <span class="run-duration">${run.duration}s</span>
-                        </div>
-                        ${run.error ? `<div class="run-error">${run.error}</div>` : ''}
-                    </div>
-                `).join('');
-            }
+.build-content {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+}
 
-            renderDetailedView(view) {
-                switch(view) {
-                    case 'branches':
-                        this.renderAllBranches();
-                        break;
-                    case 'structure':
-                        this.renderCodebaseStructure();
-                        break;
-                    case 'trends':
-                        this.renderPerformanceTrends();
-                        break;
-                }
-            }
+.build-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 
-            renderAllBranches() {
-                const container = document.getElementById('branches-container');
-                const branches = Object.entries(this.data.branches);
-                
-                container.innerHTML = branches.map(([name, data]) => {
-                    const successRate = Math.round((data.successfulRuns / data.totalRuns) * 100);
-                    return `
-                        <div class="branch-card">
-                            <div class="branch-header">
-                                <h3>${name}</h3>
-                                <span class="branch-success-rate">${successRate}%</span>
-                            </div>
-                            <div class="branch-stats">
-                                <div class="branch-stat">
-                                    <span class="stat-value">${data.totalRuns}</span>
-                                    <span class="stat-label">Total Runs</span>
-                                </div>
-                                <div class="branch-stat">
-                                    <span class="stat-value">${data.successfulRuns}</span>
-                                    <span class="stat-label">Successful</span>
-                                </div>
-                            </div>
-                            <div class="branch-recent-runs">
-                                ${data.runs.slice(0, 3).map(run => `
-                                    <div class="mini-run ${run.status}">
-                                        <span>#${run.runNumber}</span>
-                                        <span>${run.status}</span>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }
+.build-status-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
-            renderCodebaseStructure() {
-                const container = document.getElementById('folder-structure-content');
-                const mainBranch = this.data.branches.main;
-                
-                if (mainBranch && mainBranch.folderStructure) {
-                    container.innerHTML = this.buildFolderTree(mainBranch.folderStructure);
-                }
-            }
+.build-status-badge.success {
+    background: var(--color-success);
+    color: var(--color-white);
+}
 
-            buildFolderTree(structure, level = 0) {
-                return Object.entries(structure).map(([name, data]) => {
-                    const indent = '  '.repeat(level);
-                    let html = `<div class="folder-item level-${level}">`;
-                    html += `<span class="folder-name">${name}</span>`;
-                    if (data.description) {
-                        html += `<span class="folder-description">${data.description}</span>`;
-                    }
-                    html += '</div>';
-                    
-                    if (data.structure) {
-                        html += this.buildFolderTree(data.structure, level + 1);
-                    }
-                    
-                    return html;
-                }).join('');
-            }
+.build-status-badge.failed {
+    background: var(--color-fail);
+    color: var(--color-white);
+}
 
-            renderPerformanceTrends() {
-                // Analyze error patterns
-                const errorPatterns = this.analyzeErrorPatterns();
-                const container = document.getElementById('error-patterns');
-                
-                container.innerHTML = `
-                    <div class="error-pattern-list">
-                        ${errorPatterns.map(pattern => `
-                            <div class="error-pattern-item">
-                                <h4>${pattern.type}</h4>
-                                <p>${pattern.description}</p>
-                                <span class="error-count">${pattern.count} occurrences</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-            }
+.build-details p {
+    margin: 4px 0;
+    font-size: 0.95em;
+}
 
-            analyzeErrorPatterns() {
-                const patterns = {};
-                
-                Object.values(this.data.branches).forEach(branch => {
-                    branch.runs.forEach(run => {
-                        if (run.error) {
-                            const type = this.categorizeError(run.error);
-                            if (!patterns[type]) {
-                                patterns[type] = { type, count: 0, description: run.error };
-                            }
-                            patterns[type].count++;
-                        }
-                    });
-                });
-                
-                return Object.values(patterns);
-            }
+.build-details code {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Monaco', 'Consolas', monospace;
+}
 
-            categorizeError(error) {
-                if (error.includes('Authentication')) return 'Authentication Issues';
-                if (error.includes('timeout')) return 'Timeout Issues';
-                if (error.includes('Build failed')) return 'Build Failures';
-                if (error.includes('dependency')) return 'Dependency Issues';
-                return 'Other Issues';
-            }
+.quick-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
-            renderConsultantInsights() {
-                const container = document.getElementById('insights-content');
-                const insights = this.generateInsights();
-                
-                container.innerHTML = insights.map(insight => `
-                    <div class="insight-item ${insight.type}">
-                        <div class="insight-icon">${insight.icon}</div>
-                        <div class="insight-content">
-                            <h4>${insight.title}</h4>
-                            <p>${insight.description}</p>
-                        </div>
-                    </div>
-                `).join('');
-            }
+.quick-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+}
 
-            generateInsights() {
-                const insights = [];
-                const mainBranch = this.data.branches.main;
-                
-                // Overall health insight
-                if (this.data.stats.successRate > 85) {
-                    insights.push({
-                        type: 'positive',
-                        icon: '✅',
-                        title: 'High Stability',
-                        description: `${this.data.stats.successRate}% success rate indicates a stable codebase with reliable CI/CD pipeline.`
-                    });
-                } else if (this.data.stats.successRate < 70) {
-                    insights.push({
-                        type: 'warning',
-                        icon: '⚠️',
-                        title: 'Stability Concerns',
-                        description: `${this.data.stats.successRate}% success rate suggests potential reliability issues that need attention.`
-                    });
-                }
-                
-                // Architecture insight
-                insights.push({
-                    type: 'info',
-                    icon: '🏗️',
-                    title: 'Modern Architecture',
-                    description: 'React Native + Expo stack with Redux Toolkit shows modern mobile development practices.'
-                });
-                
-                // Recent activity insight
-                const recentFailures = mainBranch.runs.slice(0, 5).filter(run => run.status === 'failed').length;
-                if (recentFailures > 2) {
-                    insights.push({
-                        type: 'warning',
-                        icon: '🔄',
-                        title: 'Recent Issues',
-                        description: `${recentFailures} failures in last 5 runs on main branch may indicate ongoing issues.`
-                    });
-                }
-                
-                return insights;
-            }
+.quick-stat .stat-label {
+    font-size: 0.85em;
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
 
-            showError(message) {
-                document.body.innerHTML = `
-                    <div class="error-container">
-                        <h1>Dashboard Error</h1>
-                        <p>${message}</p>
-                    </div>
-                `;
-            }
-        }
+.quick-stat .stat-value {
+    font-size: 1.8em;
+    font-weight: bold;
+}
 
-        // Initialize dashboard when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            new TestDashboard();
-        });
-    </script>
-</body>
-</html>
+/* Main Branch Focus Section */
+.main-branch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.branch-summary-card,
+.recent-runs-card {
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.branch-summary-card h3,
+.recent-runs-card h3 {
+    color: var(--color-primary-dark);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+/* Health Indicators */
+.health-indicators {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.health-indicator {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.health-label {
+    min-width: 100px;
+    font-size: 0.9em;
+    color: var(--color-gray-600);
+}
+
+.health-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--color-gray-200);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.health-fill {
+    height: 100%;
+    background: var(--gradient-success);
+    transition: width 0.3s ease;
+}
+
+.health-value {
+    font-weight: bold;
+    color: var(--color-primary-dark);
+    min-width: 40px;
+    text-align: right;
+}
+
+.health-stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.health-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background: var(--color-white);
+    border-radius: 6px;
+    flex: 1;
+}
+
+.health-stat .stat-number {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.health-stat .stat-label {
+    font-size: 0.8em;
+    color: var(--color-gray-600);
+}
+
+/* Runs Timeline */
+.runs-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.run-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    background: var(--color-white);
+    border-radius: 6px;
+    border-left: 4px solid var(--color-gray-300);
+}
+
+.run-item.success {
+    border-left-color: var(--color-success);
+}
+
+.run-item.failed {
+    border-left-color: var(--color-fail);
+}
+
+.run-status {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-gray-400);
+}
+
+.run-item.success .run-status {
+    background: var(--color-success);
+}
+
+.run-item.failed .run-status {
+    background: var(--color-fail);
+}
+
+.run-details {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex: 1;
+}
+
+.run-number {
+    font-weight: bold;
+    color: var(--color-primary-dark);
+}
+
+.run-time {
+    color: var(--color-gray-600);
+    font-size: 0.9em;
+}
+
+.run-duration {
+    color: var(--color-gray-500);
+    font-size: 0.85em;
+}
+
+.run-error {
+    margin-top: 8px;
+    font-size: 0.85em;
+    color: var(--color-fail);
+    background: #fef2f2;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #fecaca;
+}
+
+/* View Controls */
+.view-toggle-container {
+    text-align: center;
+}
+
+.view-toggle-container h3 {
+    color: var(--color-primary-dark);
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+.view-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.view-btn {
+    padding: 12px 24px;
+    background: var(--color-white);
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.view-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.view-btn.active {
+    background: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: var(--shadow-md);
+}
+
+/* Detailed Views */
+.detailed-view {
+    margin-top: 30px;
+}
+
+/* Architecture Overview */
+.architecture-overview {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 25px;
+}
+
+.tech-stack-card,
+.folder-structure-card {
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.tech-stack-card h3,
+.folder-structure-card h3 {
+    color: var(--color-primary-dark);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tech-badge {
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 500;
+    color: var(--color-white);
+}
+
+.tech-badge.react-native {
+    background: #61dafb;
+    color: var(--color-gray-900);
+}
+
+.tech-badge.expo {
+    background: #000020;
+}
+
+.tech-badge.typescript {
+    background: #3178c6;
+}
+
+.tech-badge.redux {
+    background: #764abc;
+}
+
+/* Enhanced Folder Tree */
+.folder-tree {
+    font-family: 'Monaco', 'Consolas', monospace;
+    font-size: 0.9em;
+}
+
+.folder-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 0;
+    border-left: 2px solid transparent;
+}
+
+.folder-item.level-0 {
+    font-weight: bold;
+    color: var(--color-primary-dark);
+    border-left-color: var(--color-primary);
+    padding-left: 10px;
+}
+
+.folder-item.level-1 {
+    padding-left: 25px;
+    color: var(--color-gray-700);
+}
+
+.folder-item.level-2 {
+    padding-left: 40px;
+    color: var(--color-gray-600);
+}
+
+.folder-name {
+    font-weight: 500;
+}
+
+.folder-description {
+    color: var(--color-gray-500);
+    font-style: italic;
+    font-size: 0.85em;
+}
+
+/* Performance Trends */
+.trends-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.trend-card {
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.trend-card h3 {
+    color: var(--color-primary-dark);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.chart-container,
+.chart-placeholder {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-white);
+    border-radius: 6px;
+    border: 1px solid var(--color-gray-200);
+}
+
+.chart-placeholder {
+    color: var(--color-gray-500);
+    font-style: italic;
+}
+
+.error-analysis-card {
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.error-analysis-card h3 {
+    color: var(--color-primary-dark);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.error-pattern-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.error-pattern-item {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 6px;
+    padding: 15px;
+    border-left: 4px solid var(--color-warning);
+}
+
+.error-pattern-item h4 {
+    color: var(--color-gray-800);
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.error-pattern-item p {
+    color: var(--color-gray-600);
+    font-size: 0.9em;
+    margin-bottom: 8px;
+}
+
+.error-count {
+    background: var(--color-warning);
+    color: var(--color-white);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+/* Consultant Insights */
+.insights-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.insights-card h2 {
+    color: var(--color-primary-dark);
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.insight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background: var(--color-white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--color-info);
+}
+
+.insight-item.positive {
+    border-left-color: var(--color-success);
+}
+
+.insight-item.warning {
+    border-left-color: var(--color-warning);
+}
+
+.insight-item.info {
+    border-left-color: var(--color-info);
+}
+
+.insight-icon {
+    font-size: 1.5em;
+    flex-shrink: 0;
+}
+
+.insight-content h4 {
+    color: var(--color-gray-800);
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.insight-content p {
+    color: var(--color-gray-600);
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+/* Original Stats Grid (maintained) */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-card h3 {
+    color: var(--color-secondary);
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.stat-card.success-rate p {
+    color: var(--color-success);
+}
+
+/* Original Branches Summary Grid (maintained) */
+.branches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.branch-card {
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+}
+
+.branch-card:hover {
+    transform: translateY(-5px);
+}
+
+.branch-header {
+    background: var(--color-primary-light);
+    color: var(--color-white);
+    padding: 15px 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.branch-header .status-badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.branch-success-rate {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9em;
+}
+
+.branch-content {
+    padding: 20px;
+}
+
+.branch-content h4 {
+    color: var(--color-primary-dark);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.branch-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.branch-stat {
+    text-align: center;
+}
+
+.branch-stat .stat-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--color-primary);
+    display: block;
+}
+
+.branch-stat .stat-label {
+    font-size: 0.85em;
+    color: var(--color-gray-600);
+}
+
+.branch-recent-runs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.mini-run {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 0.8em;
+    min-width: 60px;
+}
+
+.mini-run.success {
+    background: #dcfce7;
+    color: var(--color-success);
+}
+
+.mini-run.failed {
+    background: #fef2f2;
+    color: var(--color-fail);
+}
+
+.summary-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.summary-item {
+    text-align: center;
+}
+
+.summary-item .value {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.summary-item .label {
+    font-size: 0.85em;
+    color: var(--color-gray-600);
+}
+
+/* Original Tables (maintained) */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.test-runs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.test-runs-table th,
+.test-runs-table td {
+    padding: 12px 15px;
+    border: 1px solid var(--color-gray-200);
+    text-align: left;
+}
+
+.test-runs-table th {
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-700);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+.test-runs-table tbody tr:nth-child(even) {
+    background-color: var(--color-gray-50);
+}
+
+.test-runs-table tbody tr:hover {
+    background-color: var(--color-gray-100);
+}
+
+/* Status Classes (maintained) */
+.status-success {
+    color: var(--color-success);
+    font-weight: bold;
+}
+
+.status-failed {
+    color: var(--color-fail);
+    font-weight: bold;
+}
+
+.status-warning {
+    color: var(--color-warning);
+    font-weight: bold;
+}
+
+.text-red-600 {
+    color: var(--color-fail);
+}
+
+.overflow-x-auto {
+    overflow-x: auto;
+}
+
+/* Original Folder Structure Tree (maintained but enhanced) */
+.folder-tree ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.folder-tree li {
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+.folder-tree li span {
+    font-weight: bold;
+    color: var(--color-gray-700);
+}
+
+.folder-tree li .description {
+    font-size: 0.9em;
+    color: var(--color-gray-600);
+    margin-left: 10px;
+}
+
+/* Error Container */
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    padding: 40px;
+}
+
+.error-container h1 {
+    color: var(--color-fail);
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.error-container p {
+    color: var(--color-gray-600);
+    font-size: 1.1em;
+}
+
+/* Back to Top Button (maintained) */
+#back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 24px;
+    border: none;
+    outline: none;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 50%;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+#back-to-top:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .latest-build-card {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .quick-stats {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    
+    .main-branch-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .architecture-overview {
+        grid-template-columns: 1fr;
+    }
+    
+    .trends-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .header-meta {
+        align-items: center;
+    }
+    
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .dashboard-section {
+        padding: 15px;
+    }
+
+    .dashboard-section h2 {
+        font-size: 1.5em;
+    }
+
+    .stats-grid,
+    .branches-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .test-runs-table th,
+    .test-runs-table td {
+        padding: 10px;
+    }
+    
+    .view-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .view-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .build-info {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .quick-stats {
+        flex-direction: column;
+    }
+    
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .dashboard-section {
+        padding: 12px;
+    }
+    
+    .tech-badges {
+        justify-content: center;
+    }
+    
+    .branch-stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .run-details {
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+    }
+}
