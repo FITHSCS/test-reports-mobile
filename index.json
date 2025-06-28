@@ -1,15 +1,15 @@
 {
-  "generated": "2025-06-28T18:06:02Z",
+  "generated": "2025-06-28T18:06:50Z",
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "49",
-    "branch": "left",
-    "commit": "1be53b0133cb4bfb6f108dcc41f0d2d122f7ddc2",
-    "shortCommit": "$(echo 1be53b0133cb4bfb6f108dcc41f0d2d122f7ddc2 | cut -c1-7)",
+    "runNumber": "50",
+    "branch": "44/merge",
+    "commit": "589332607b60ccafe0d1cfeed87c0ba8c1b04779",
+    "shortCommit": "$(echo 589332607b60ccafe0d1cfeed87c0ba8c1b04779 | cut -c1-7)",
     "actor": "brukGit",
-    "timestamp": "2025-06-28T18:06:02Z",
+    "timestamp": "2025-06-28T18:06:50Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/15946795241"
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/15946803553"
   }
 }
