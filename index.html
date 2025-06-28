@@ -4,535 +4,260 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FITHSCS Mobile App - Test Reports Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your external CSS file -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="container">
+    <div class="dashboard-container">
+        <!-- Dashboard Header -->
+        <header class="dashboard-header">
             <div class="header-content">
-                <div class="project-info">
-                    <h1>FITHSCS Mobile App</h1>
-                    <p class="project-subtitle">React Native • Expo • Test Benchmarks Dashboard</p>
+                <div class="brand-section">
+                    <div class="logo-container">
+                        <!-- Animated Logo - Representing Logistic Movement -->
+                        <div class="logo-icon">
+                            <div class="delivery-icon">
+                                <div class="package-box"></div>
+                                <div class="delivery-path"></div>
+                            </div>
+                        </div>
+                        <div class="brand-info">
+                            <h1 class="brand-title">FITHSCS Mobile App</h1>
+                            <p class="brand-subtitle">Professional Test Reports Dashboard</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="header-meta">
-                    <p id="last-updated" class="last-updated"></p>
-                    <a id="repo-link" class="repo-link" href="#" target="_blank">
-                        View Repository →
-                    </a>
+                    <span class="status-indicator">
+                        <span class="pulse-dot"></span> CI/CD Status: Online
+                    </span>
+                    <span id="last-updated" class="text-muted text-sm">Last updated: -</span>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <main class="container">
-        <!-- Latest Build Status - Hero Section -->
-        <section id="latest-build" class="dashboard-section hero-section">
-            <div class="latest-build-card">
-                <div class="build-status">
-                    <h2>Latest Build Status</h2>
-                    <div id="latest-build-content" class="build-content">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-                </div>
-                <div class="quick-stats">
-                    <div class="quick-stat">
-                        <span class="stat-label">Success Rate</span>
-                        <span id="quick-success-rate" class="stat-value"></span>
-                    </div>
-                    <div class="quick-stat">
-                        <span class="stat-label">Total Runs</span>
-                        <span id="quick-total-runs" class="stat-value"></span>
-                    </div>
-                    <div class="quick-stat">
-                        <span class="stat-label">Active Branches</span>
-                        <span id="quick-total-branches" class="stat-value"></span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Main Branch Focus (Default View) -->
-        <section id="main-branch-focus" class="dashboard-section">
-            <div class="section-header">
-                <h2>Main Branch Analysis</h2>
-                <p class="section-description">Production-ready branch performance and stability metrics</p>
+        <!-- Main Dashboard Content Area -->
+        <main class="dashboard-main">
+            <!-- Loading State -->
+            <div id="loading" class="loading-container">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Analyzing delivery routes and test reports...</div>
             </div>
             
-            <div class="main-branch-grid">
-                <div class="branch-summary-card">
-                    <h3>Branch Health</h3>
-                    <div id="main-branch-health" class="health-indicators">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-                
-                <div class="recent-runs-card">
-                    <h3>Recent Test Runs</h3>
-                    <div id="main-recent-runs" class="runs-timeline">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
+            <!-- Error State -->
+            <div id="error" class="error-container hidden">
+                <div class="error-icon">⚠️</div>
+                <h2 class="error-title">Unable to Access Delivery Data</h2>
+                <p class="error-message">
+                    The system encountered an issue fetching test reports.
+                    <br>Please ensure `index.json` is available and accessible. Retrying in 30 seconds...
+                </p>
             </div>
-        </section>
-
-        <!-- Navigation Controls -->
-        <section id="view-controls" class="dashboard-section">
-            <div class="view-toggle-container">
-                <h3>Detailed Analysis</h3>
-                <div class="view-buttons">
-                    <button id="btn-all-branches" class="view-btn" data-view="branches">
-                        All Branches Overview
-                    </button>
-                    <button id="btn-codebase-structure" class="view-btn" data-view="structure">
-                        Codebase Structure
-                    </button>
-                    <button id="btn-performance-trends" class="view-btn" data-view="trends">
-                        Performance Trends
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Detailed Views (Initially Hidden) -->
-        <section id="detailed-views" class="dashboard-section">
             
-            <!-- All Branches View -->
-            <div id="branches-detailed-view" class="detailed-view" style="display: none;">
-                <div class="section-header">
-                    <h2>All Branches Analysis</h2>
-                    <p class="section-description">Comprehensive view of all development branches and their test performance</p>
-                </div>
-                <div id="branches-container" class="branches-grid">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-
-            <!-- Codebase Structure View -->
-            <div id="structure-detailed-view" class="detailed-view" style="display: none;">
-                <div class="section-header">
-                    <h2>Project Architecture Overview</h2>
-                    <p class="section-description">React Native + Expo application structure and organization</p>
-                </div>
-                
-                <div class="architecture-overview">
-                    <div class="tech-stack-card">
-                        <h3>Technology Stack</h3>
-                        <div class="tech-badges">
-                            <span class="tech-badge react-native">React Native</span>
-                            <span class="tech-badge expo">Expo</span>
-                            <span class="tech-badge typescript">TypeScript</span>
-                            <span class="tech-badge redux">Redux Toolkit</span>
-                        </div>
+            <!-- Dashboard Sections (hidden by default, shown by JS) -->
+            <div id="dashboard" class="hidden">
+                <!-- KPI Statistics Section -->
+                <section class="kpi-section">
+                    <div class="section-header">
+                        <h2>Key Performance Indicators</h2>
+                        <p class="section-subtitle">Real-time insights into test pipeline health and efficiency.</p>
                     </div>
-                    
-                    <div class="folder-structure-card">
-                        <h3>Project Structure</h3>
-                        <div id="folder-structure-content" class="folder-tree">
-                            <!-- Populated by JS from both JSON and folder-structure.txt -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Performance Trends View -->
-            <div id="trends-detailed-view" class="detailed-view" style="display: none;">
-                <div class="section-header">
-                    <h2>Performance & Reliability Trends</h2>
-                    <p class="section-description">Historical analysis of test execution patterns and build reliability</p>
-                </div>
-                
-                <div class="trends-grid">
-                    <div class="trend-card">
-                        <h3>Success Rate Trend</h3>
-                        <div id="success-trend-chart" class="chart-container">
-                            <!-- Chart placeholder -->
-                            <p class="chart-placeholder">Success rate visualization coming soon</p>
-                        </div>
-                    </div>
-                    
-                    <div class="trend-card">
-                        <h3>Build Duration Analysis</h3>
-                        <div id="duration-trend-chart" class="chart-container">
-                            <!-- Chart placeholder -->
-                            <p class="chart-placeholder">Build duration trends coming soon</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="error-analysis-card">
-                    <h3>Common Issues & Patterns</h3>
-                    <div id="error-patterns" class="error-patterns">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Consultant Insights Section -->
-        <section id="consultant-insights" class="dashboard-section">
-            <div class="insights-card">
-                <h2>Key Insights for Code Review</h2>
-                <div id="insights-content" class="insights-grid">
-                    <!-- Populated by JS with calculated insights -->
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <button id="back-to-top" title="Go to top">⬆️</button>
-
-    <script>
-        // Enhanced dashboard functionality
-        class TestDashboard {
-            constructor() {
-                this.data = null;
-                this.currentView = 'main';
-                this.init();
-            }
-
-            async init() {
-                try {
-                    await this.loadData();
-                    this.setupEventListeners();
-                    this.renderDashboard();
-                } catch (error) {
-                    console.error('Failed to initialize dashboard:', error);
-                    this.showError('Failed to load test data');
-                }
-            }
-
-            async loadData() {
-                const response = await fetch('index.json');
-                this.data = await response.json();
-            }
-
-            setupEventListeners() {
-                // View toggle buttons
-                document.querySelectorAll('.view-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const view = e.target.dataset.view;
-                        this.switchView(view);
-                    });
-                });
-
-                // Back to top button
-                const backToTop = document.getElementById('back-to-top');
-                window.addEventListener('scroll', () => {
-                    backToTop.style.display = window.pageYOffset > 300 ? 'block' : 'none';
-                });
-                backToTop.addEventListener('click', () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-
-            switchView(view) {
-                // Hide all detailed views
-                document.querySelectorAll('.detailed-view').forEach(el => {
-                    el.style.display = 'none';
-                });
-
-                // Remove active class from all buttons
-                document.querySelectorAll('.view-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-
-                // Show selected view and activate button
-                const viewElement = document.getElementById(`${view}-detailed-view`);
-                const buttonElement = document.querySelector(`[data-view="${view}"]`);
-                
-                if (viewElement) {
-                    viewElement.style.display = 'block';
-                    buttonElement.classList.add('active');
-                    this.currentView = view;
-                    
-                    // Render specific view content
-                    this.renderDetailedView(view);
-                }
-            }
-
-            renderDashboard() {
-                this.renderHeader();
-                this.renderLatestBuild();
-                this.renderMainBranchFocus();
-                this.renderConsultantInsights();
-            }
-
-            renderHeader() {
-                const lastUpdated = document.getElementById('last-updated');
-                const repoLink = document.getElementById('repo-link');
-                
-                if (this.data.generated) {
-                    const date = new Date(this.data.generated);
-                    lastUpdated.textContent = `Last updated: ${date.toLocaleString()}`;
-                }
-                
-                if (this.data.repository) {
-                    repoLink.href = this.data.repository;
-                }
-            }
-
-            renderLatestBuild() {
-                const latest = this.data.latestRun;
-                const content = document.getElementById('latest-build-content');
-                
-                const statusClass = latest.status === 'success' ? 'success' : 'failed';
-                
-                content.innerHTML = `
-                    <div class="build-info">
-                        <div class="build-status-badge ${statusClass}">
-                            ${latest.status.toUpperCase()}
-                        </div>
-                        <div class="build-details">
-                            <p><strong>Run #${latest.runNumber}</strong> on <strong>${latest.branch}</strong></p>
-                            <p>Commit: <code>${latest.shortCommit}</code> by ${latest.actor}</p>
-                            <p>${new Date(latest.timestamp).toLocaleString()}</p>
-                        </div>
-                    </div>
-                `;
-
-                // Quick stats
-                document.getElementById('quick-success-rate').textContent = `${this.data.stats.successRate}%`;
-                document.getElementById('quick-total-runs').textContent = this.data.stats.totalRuns;
-                document.getElementById('quick-total-branches').textContent = this.data.stats.totalBranches;
-            }
-
-            renderMainBranchFocus() {
-                const mainBranch = this.data.branches.main;
-                if (!mainBranch) return;
-
-                // Branch health indicators
-                const healthContainer = document.getElementById('main-branch-health');
-                const successRate = Math.round((mainBranch.successfulRuns / mainBranch.totalRuns) * 100);
-                
-                healthContainer.innerHTML = `
-                    <div class="health-indicator">
-                        <span class="health-label">Success Rate</span>
-                        <div class="health-bar">
-                            <div class="health-fill" style="width: ${successRate}%"></div>
-                        </div>
-                        <span class="health-value">${successRate}%</span>
-                    </div>
-                    <div class="health-stats">
-                        <div class="health-stat">
-                            <span class="stat-number">${mainBranch.successfulRuns}</span>
-                            <span class="stat-label">Successful</span>
-                        </div>
-                        <div class="health-stat">
-                            <span class="stat-number">${mainBranch.totalRuns - mainBranch.successfulRuns}</span>
-                            <span class="stat-label">Failed</span>
-                        </div>
-                    </div>
-                `;
-
-                // Recent runs timeline
-                const runsContainer = document.getElementById('main-recent-runs');
-                const recentRuns = mainBranch.runs.slice(0, 5);
-                
-                runsContainer.innerHTML = recentRuns.map(run => `
-                    <div class="run-item ${run.status}">
-                        <div class="run-status"></div>
-                        <div class="run-details">
-                            <span class="run-number"># ${run.runNumber}</span>
-                            <span class="run-time">${new Date(run.timestamp).toLocaleDateString()}</span>
-                            <span class="run-duration">${run.duration}s</span>
-                        </div>
-                        ${run.error ? `<div class="run-error">${run.error}</div>` : ''}
-                    </div>
-                `).join('');
-            }
-
-            renderDetailedView(view) {
-                switch(view) {
-                    case 'branches':
-                        this.renderAllBranches();
-                        break;
-                    case 'structure':
-                        this.renderCodebaseStructure();
-                        break;
-                    case 'trends':
-                        this.renderPerformanceTrends();
-                        break;
-                }
-            }
-
-            renderAllBranches() {
-                const container = document.getElementById('branches-container');
-                const branches = Object.entries(this.data.branches);
-                
-                container.innerHTML = branches.map(([name, data]) => {
-                    const successRate = Math.round((data.successfulRuns / data.totalRuns) * 100);
-                    return `
-                        <div class="branch-card">
-                            <div class="branch-header">
-                                <h3>${name}</h3>
-                                <span class="branch-success-rate">${successRate}%</span>
-                            </div>
-                            <div class="branch-stats">
-                                <div class="branch-stat">
-                                    <span class="stat-value">${data.totalRuns}</span>
-                                    <span class="stat-label">Total Runs</span>
+                    <div class="kpi-grid">
+                        <div class="kpi-card primary">
+                            <div class="kpi-header">
+                                <div class="kpi-icon delivery-success">
+                                    <div class="check-animation"></div>
                                 </div>
-                                <div class="branch-stat">
-                                    <span class="stat-value">${data.successfulRuns}</span>
-                                    <span class="stat-label">Successful</span>
+                                <div class="kpi-trend positive" id="success-trend-kpi">
+                                    <!-- Trend will be injected here -->
                                 </div>
                             </div>
-                            <div class="branch-recent-runs">
-                                ${data.runs.slice(0, 3).map(run => `
-                                    <div class="mini-run ${run.status}">
-                                        <span>#${run.runNumber}</span>
-                                        <span>${run.status}</span>
+                            <div class="kpi-content">
+                                <div class="kpi-value" id="total-runs">0</div>
+                                <div class="kpi-label">Total Delivery Runs</div>
+                                <div class="kpi-subtitle">Completed CI/CD cycles</div>
+                            </div>
+                        </div>
+                        
+                        <div class="kpi-card secondary">
+                            <div class="kpi-header">
+                                <div class="kpi-icon deployment-speed">
+                                    <div class="speed-rings">
+                                        <div class="ring ring-1"></div>
+                                        <div class="ring ring-2"></div>
+                                        <div class="ring ring-3"></div>
                                     </div>
-                                `).join('')}
+                                </div>
+                                <div class="kpi-trend stable" id="branches-trend-kpi">
+                                    <!-- Trend will be injected here -->
+                                </div>
+                            </div>
+                            <div class="kpi-content">
+                                <div class="kpi-value" id="total-branches">0</div>
+                                <div class="kpi-label">Active Delivery Hubs</div>
+                                <div class="kpi-subtitle">Distinct branches in action</div>
                             </div>
                         </div>
-                    `;
-                }).join('');
-            }
-
-            renderCodebaseStructure() {
-                const container = document.getElementById('folder-structure-content');
-                const mainBranch = this.data.branches.main;
-                
-                if (mainBranch && mainBranch.folderStructure) {
-                    container.innerHTML = this.buildFolderTree(mainBranch.folderStructure);
-                }
-            }
-
-            buildFolderTree(structure, level = 0) {
-                return Object.entries(structure).map(([name, data]) => {
-                    const indent = '  '.repeat(level);
-                    let html = `<div class="folder-item level-${level}">`;
-                    html += `<span class="folder-name">${name}</span>`;
-                    if (data.description) {
-                        html += `<span class="folder-description">${data.description}</span>`;
-                    }
-                    html += '</div>';
-                    
-                    if (data.structure) {
-                        html += this.buildFolderTree(data.structure, level + 1);
-                    }
-                    
-                    return html;
-                }).join('');
-            }
-
-            renderPerformanceTrends() {
-                // Analyze error patterns
-                const errorPatterns = this.analyzeErrorPatterns();
-                const container = document.getElementById('error-patterns');
-                
-                container.innerHTML = `
-                    <div class="error-pattern-list">
-                        ${errorPatterns.map(pattern => `
-                            <div class="error-pattern-item">
-                                <h4>${pattern.type}</h4>
-                                <p>${pattern.description}</p>
-                                <span class="error-count">${pattern.count} occurrences</span>
+                        
+                        <div class="kpi-card tertiary">
+                            <div class="kpi-header">
+                                <div class="kpi-icon branch-network">
+                                    <div class="network-nodes">
+                                        <div class="node main-node"></div>
+                                        <div class="node branch-node"></div>
+                                        <div class="node branch-node"></div>
+                                        <div class="connection-line"></div>
+                                    </div>
+                                </div>
+                                <div class="kpi-trend positive" id="rate-trend-kpi">
+                                    <!-- Trend will be injected here -->
+                                </div>
                             </div>
-                        `).join('')}
-                    </div>
-                `;
-            }
-
-            analyzeErrorPatterns() {
-                const patterns = {};
-                
-                Object.values(this.data.branches).forEach(branch => {
-                    branch.runs.forEach(run => {
-                        if (run.error) {
-                            const type = this.categorizeError(run.error);
-                            if (!patterns[type]) {
-                                patterns[type] = { type, count: 0, description: run.error };
-                            }
-                            patterns[type].count++;
-                        }
-                    });
-                });
-                
-                return Object.values(patterns);
-            }
-
-            categorizeError(error) {
-                if (error.includes('Authentication')) return 'Authentication Issues';
-                if (error.includes('timeout')) return 'Timeout Issues';
-                if (error.includes('Build failed')) return 'Build Failures';
-                if (error.includes('dependency')) return 'Dependency Issues';
-                return 'Other Issues';
-            }
-
-            renderConsultantInsights() {
-                const container = document.getElementById('insights-content');
-                const insights = this.generateInsights();
-                
-                container.innerHTML = insights.map(insight => `
-                    <div class="insight-item ${insight.type}">
-                        <div class="insight-icon">${insight.icon}</div>
-                        <div class="insight-content">
-                            <h4>${insight.title}</h4>
-                            <p>${insight.description}</p>
+                            <div class="kpi-content">
+                                <div class="kpi-value" id="success-rate">0%</div>
+                                <div class="kpi-label">Successful Deliveries</div>
+                                <div class="kpi-subtitle">Overall test success rate</div>
+                            </div>
                         </div>
                     </div>
-                `).join('');
-            }
+                </section>
 
-            generateInsights() {
-                const insights = [];
-                const mainBranch = this.data.branches.main;
-                
-                // Overall health insight
-                if (this.data.stats.successRate > 85) {
-                    insights.push({
-                        type: 'positive',
-                        icon: '✅',
-                        title: 'High Stability',
-                        description: `${this.data.stats.successRate}% success rate indicates a stable codebase with reliable CI/CD pipeline.`
-                    });
-                } else if (this.data.stats.successRate < 70) {
-                    insights.push({
-                        type: 'warning',
-                        icon: '⚠️',
-                        title: 'Stability Concerns',
-                        description: `${this.data.stats.successRate}% success rate suggests potential reliability issues that need attention.`
-                    });
-                }
-                
-                // Architecture insight
-                insights.push({
-                    type: 'info',
-                    icon: '🏗️',
-                    title: 'Modern Architecture',
-                    description: 'React Native + Expo stack with Redux Toolkit shows modern mobile development practices.'
-                });
-                
-                // Recent activity insight
-                const recentFailures = mainBranch.runs.slice(0, 5).filter(run => run.status === 'failed').length;
-                if (recentFailures > 2) {
-                    insights.push({
-                        type: 'warning',
-                        icon: '🔄',
-                        title: 'Recent Issues',
-                        description: `${recentFailures} failures in last 5 runs on main branch may indicate ongoing issues.`
-                    });
-                }
-                
-                return insights;
-            }
-
-            showError(message) {
-                document.body.innerHTML = `
-                    <div class="error-container">
-                        <h1>Dashboard Error</h1>
-                        <p>${message}</p>
+                <!-- Deployment Status Overview -->
+                <section class="deployment-status-section">
+                    <div class="section-header">
+                        <h2>Deployment Readiness</h2>
+                        <p class="section-subtitle">Real-time status of critical release branches.</p>
                     </div>
-                `;
-            }
-        }
+                    <div id="deployment-overview-cards" class="kpi-grid">
+                        <!-- Deployment status cards will be rendered here -->
+                    </div>
 
-        // Initialize dashboard when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            new TestDashboard();
-        });
-    </script>
+                    <div class="timeline-header mt-6">
+                        <h3>Delivery Flow Timeline</h3>
+                    </div>
+                    <div class="timeline-track">
+                        <!-- Animated timeline representing successful deliveries -->
+                        <svg class="delivery-truck-svg" viewBox="0 0 100 20" preserveAspectRatio="xMidYMid meet">
+                            <path class="road-line" d="M0 10 L100 10" stroke="#374151" stroke-width="1"></path>
+                            <circle class="truck-wheel" cx="15" cy="10" r="3" fill="#60a5fa"></circle>
+                            <circle class="truck-wheel" cx="85" cy="10" r="3" fill="#60a5fa"></circle>
+                            <rect class="truck-body" x="10" y="5" width="80" height="10" rx="2" fill="#2563eb"></rect>
+                            <polyline class="truck-roof" points="10,5 20,0 80,0 90,5" fill="#1e40af"></polyline>
+                            <circle class="package-bubble" cx="50" cy="10" r="4" fill="#10b981" stroke="#fff" stroke-width="0.5"></circle>
+                        </svg>
+                    </div>
+                </section>
+
+                <!-- Advanced Filters & Search -->
+                <section class="card mb-6">
+                    <div class="card-header">
+                        <h2 class="chart-title">🔍 Trace & Filter Deliveries</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="grid grid-cols-4 gap-4 mb-4">
+                            <input type="text" id="search-input" placeholder="Search branch, commit, or test..." class="form-input" />
+                            <select id="status-filter" class="form-select">
+                                <option value="">All Status</option>
+                                <option value="success">✅ Success</option>
+                                <option value="failed">❌ Failed</option>
+                                <option value="warning">⚠️ Warning</option>
+                            </select>
+                            <input type="date" id="start-date" class="form-input" />
+                            <input type="date" id="end-date" class="form-input" />
+                        </div>
+                        <div class="flex gap-2 mb-2">
+                            <button id="filter-apply" class="chart-toggle">Apply Filters</button>
+                            <button id="filter-reset" class="chart-toggle">Reset</button>
+                            <select id="sort-order" class="form-select">
+                                <option value="date-desc">Sort by Date ↓</option>
+                                <option value="date-asc">Sort by Date ↑</option>
+                                <option value="success-rate-desc">Success Rate ↓</option>
+                                <option value="success-rate-asc">Success Rate ↑</option>
+                                <option value="coverage-desc">Coverage ↓</option>
+                                <option value="coverage-asc">Coverage ↑</option>
+                            </select>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="chart-toggle" onclick="applyPreset('failed')">Failed Deliveries Only</button>
+                            <button class="chart-toggle" onclick="applyPreset('low-coverage')">Critical Path Unverified</button>
+                            <button class="chart-toggle" onclick="applyPreset('recent')">Recent Activities</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Success Rate Trend Chart -->
+                <section class="charts-section">
+                    <div class="card-header">
+                        <div class="chart-header">
+                            <h2 class="chart-title">📈 Delivery Success Rate Trends</h2>
+                            <div class="chart-controls">
+                                <button class="chart-toggle active" data-period="7d">7 Days</button>
+                                <button class="chart-toggle" data-period="30d">30 Days</button>
+                                <button class="chart-toggle" data-period="90d">90 Days</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <svg class="svg-chart" id="success-trend-chart">
+                            <!-- Chart will be generated by JavaScript -->
+                        </svg>
+                    </div>
+                </section>
+
+                <!-- Coverage Visualization Grid -->
+                <section class="charts-section">
+                    <div class="card-header">
+                        <h2 class="chart-title">📦 Package Coverage Metrics</h2>
+                    </div>
+                    <div class="coverage-grid" id="coverage-grid">
+                        <!-- Coverage cards will be generated by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Branch Performance Section -->
+                <section class="charts-section">
+                    <div class="card-header">
+                        <h2 class="chart-title">🚚 Delivery Hub Performance</h2>
+                    </div>
+                    <div class="branch-performance" id="branch-performance">
+                        <!-- Performance cards will be generated by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Template for Branch Detail Expansion (Hidden by default) -->
+                <div class="branch-detail-template hidden" id="branch-details-template">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="text-lg font-semibold">Test Runs for <span id="branch-detail-name"></span></h3>
+                        </div>
+                        <div class="card-body" id="branch-detail-body">
+                            <div class="branch-loading text-muted">Loading test runs...</div>
+                            <table class="w-full text-sm hidden">
+                                <thead>
+                                    <tr>
+                                        <th class="text-left p-2">Run #</th>
+                                        <th class="text-left p-2">Status</th>
+                                        <th class="text-left p-2">Date</th>
+                                        <th class="text-left p-2">Duration</th>
+                                        <th class="text-left p-2">Error (if any)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="branch-run-list">
+                                    <!-- Individual runs for this branch will be populated via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="chart-toggle fixed-button top-button">
+        ↑ Top
+    </button>
+
+    <script src="dashboard.js"></script> <!-- Link to your external JavaScript file -->
 </body>
 </html>
