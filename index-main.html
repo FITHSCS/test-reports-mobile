@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FITHSCS Mobile App - Test Reports Dashboard</title>
+    <link rel="stylesheet" href="styles.css"> </head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FITHSCS Mobile App - Test Reports Dashboard</h1>
+            <p id="last-updated"></p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="overall-stats" class="dashboard-section">
+            <h2>Overall Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card total-runs">
+                    <h3>Total Runs</h3>
+                    <p id="total-runs"></p>
+                </div>
+                <div class="stat-card total-branches">
+                    <h3>Total Branches</h3>
+                    <p id="total-branches"></p>
+                </div>
+                <div class="stat-card success-rate">
+                    <h3>Success Rate</h3>
+                    <p id="success-rate"></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="branches-summary" class="dashboard-section">
+            <h2>Branches Summary</h2>
+            <div id="branches-container" class="branches-grid">
+                </div>
+        </section>
+
+        <section id="folder-structure" class="dashboard-section">
+            <h2>Project Folder Structure</h2>
+            <div id="folder-structure-content" class="folder-tree">
+                </div>
+        </section>
+    </main>
+
+    <button id="back-to-top" title="Go to top">⬆️</button>
+
+    <script src="dashboard.js"></script> </body>
+</html>
