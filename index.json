@@ -6,10 +6,144 @@
     "runNumber": "51",
     "branch": "main",
     "commit": "6a00228c12283344fad63aba16aa4a84497f8b76",
-    "shortCommit": "$(echo 6a00228c12283344fad63aba16aa4a84497f8b76 | cut -c1-7)",
+    "shortCommit": "6a00228",
     "actor": "brukGit",
     "timestamp": "2025-06-28T18:07:05Z",
     "status": "success",
     "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/15946805257"
+  },
+  "stats": {
+    "totalRuns": 51,
+    "totalBranches": 3,
+    "successRate": 87.5
+  },
+  "branches": {
+    "main": {
+      "totalRuns": 35,
+      "successfulRuns": 32,
+      "runs": [
+        {
+          "runNumber": "51",
+          "status": "success",
+          "timestamp": "2025-06-28T18:07:05Z",
+          "duration": 45,
+          "error": null
+        },
+        {
+          "runNumber": "50",
+          "status": "success",
+          "timestamp": "2025-06-28T16:30:22Z",
+          "duration": 42,
+          "error": null
+        },
+        {
+          "runNumber": "49",
+          "status": "failed",
+          "timestamp": "2025-06-28T14:15:33Z",
+          "duration": 38,
+          "error": "Test failed: Authentication module - Expected status 200 but got 401"
+        },
+        {
+          "runNumber": "48",
+          "status": "success",
+          "timestamp": "2025-06-28T12:45:11Z",
+          "duration": 41,
+          "error": null
+        },
+        {
+          "runNumber": "47",
+          "status": "success",
+          "timestamp": "2025-06-28T10:20:45Z",
+          "duration": 39,
+          "error": null
+        }
+      ],
+      "folderStructure": {
+        "src": {
+          "description": "Source code directory",
+          "structure": {
+            "components": {
+              "description": "React Native components"
+            },
+            "screens": {
+              "description": "App screens"
+            },
+            "services": {
+              "description": "API and service functions"
+            },
+            "utils": {
+              "description": "Utility functions"
+            }
+          }
+        },
+        "tests": {
+          "description": "Test files",
+          "structure": {
+            "unit": {
+              "description": "Unit tests"
+            },
+            "integration": {
+              "description": "Integration tests"
+            },
+            "e2e": {
+              "description": "End-to-end tests"
+            }
+          }
+        },
+        "docs": {
+          "description": "Documentation files"
+        },
+        "config": {
+          "description": "Configuration files"
+        }
+      }
+    },
+    "develop": {
+      "totalRuns": 12,
+      "successfulRuns": 10,
+      "runs": [
+        {
+          "runNumber": "46",
+          "status": "success",
+          "timestamp": "2025-06-28T09:15:20Z",
+          "duration": 43,
+          "error": null
+        },
+        {
+          "runNumber": "45",
+          "status": "failed",
+          "timestamp": "2025-06-27T17:30:15Z",
+          "duration": 35,
+          "error": "Build failed: Missing dependency react-native-vector-icons"
+        },
+        {
+          "runNumber": "44",
+          "status": "success",
+          "timestamp": "2025-06-27T15:22:08Z",
+          "duration": 40,
+          "error": null
+        }
+      ]
+    },
+    "feature/authentication": {
+      "totalRuns": 4,
+      "successfulRuns": 3,
+      "runs": [
+        {
+          "runNumber": "43",
+          "status": "success",
+          "timestamp": "2025-06-27T13:45:30Z",
+          "duration": 37,
+          "error": null
+        },
+        {
+          "runNumber": "42",
+          "status": "failed",
+          "timestamp": "2025-06-27T11:20:45Z",
+          "duration": 28,
+          "error": "Test timeout: Login flow test exceeded 30 seconds"
+        }
+      ]
+    }
   }
 }
