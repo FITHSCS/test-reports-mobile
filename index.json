@@ -1,21 +1,21 @@
 {
-  "generated": "2025-06-28T18:07:05Z",
+  "generated": "2025-06-28T19:23:27.813Z",
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "51",
-    "branch": "main",
-    "commit": "6a00228c12283344fad63aba16aa4a84497f8b76",
-    "shortCommit": "6a00228",
+    "runNumber": "52",
+    "branch": "left",
+    "commit": "5fa0f009b20ac4a4b91901ff3f610b4773b41f9c",
+    "shortCommit": "5fa0f00",
     "actor": "brukGit",
-    "timestamp": "2025-06-28T18:07:05Z",
+    "timestamp": "2025-06-28T19:23:27.813Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/15946805257"
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/15947407845"
   },
   "stats": {
-    "totalRuns": 51,
-    "totalBranches": 3,
-    "successRate": 87.5
+    "totalRuns": 52,
+    "totalBranches": 4,
+    "successRate": 88.5
   },
   "branches": {
     "main": {
@@ -142,6 +142,19 @@
           "timestamp": "2025-06-27T11:20:45Z",
           "duration": 28,
           "error": "Test timeout: Login flow test exceeded 30 seconds"
+        }
+      ]
+    },
+    "left": {
+      "totalRuns": 1,
+      "successfulRuns": 1,
+      "runs": [
+        {
+          "runNumber": "52",
+          "status": "success",
+          "timestamp": "2025-06-28T19:23:27.807Z",
+          "duration": 58,
+          "error": null
         }
       ]
     }
