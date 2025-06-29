@@ -78,7 +78,7 @@ data.stats.successRate = data.stats.totalRuns > 0 ?
   Math.round((totalSuccessful / data.stats.totalRuns) * 100 * 10) / 10 : 0;
 
 // Update metadata
-data.generated = new Date().toISOString();
+data.generated = new Date().toISOString(); // Initialize generated timestamp for new data
 data.projectName = "FITHSCS Mobile App";
 data.repository = "https://github.com/FITHSCS/mobile";
 data.latestRun = {

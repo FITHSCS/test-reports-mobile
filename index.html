@@ -209,6 +209,9 @@
             border-radius: 50%;
             animation: routeBlink 2s ease-in-out infinite;
         }
+        #comingsoon {
+            color: 'red';            
+        }
 
         @keyframes routeBlink {
 
@@ -403,19 +406,25 @@
             <div class="status-container">
                 <div class="status-badge">
                     <div class="route-dot"></div>
-                    coming soon 
+                    <span id="comingsoon">COMING SOON</span>
                 </div>
                 <div class="route-indicator">
                     <span>MANIFEST_STATUS:</span>
+                    <span>DELIVERED</span>
+
+                </div>
+                <div class="route-indicator">
                     <div class="route-dot"></div>
                     <span>SYNC</span>
                 </div>
+                   
             </div>
 
             <p class="description">
                 Mobile application testing frameworks are currently under development. We're doing our 
-                best to provide meaningful measurements and representations of FITHSCS App performance based on 
-                a set of benchmarks.
+                best to provide meaningful measurements and representations of FITHSCS App performance soon.
+                
+                We apologize for any inconvenience.
             </p>
 
             <div class="metrics-grid">
@@ -441,9 +450,10 @@
                         </svg>
                     </div>
                     <div class="metric-title">Scanner Reliability</div>
+                    <div class="metric-subtitle">Camera access capability</div>
                     <div class="metric-subtitle">Scan success rate</div>
-                    <div class="metric-subtitle">Low-light performance</div>
-                    <div class="metric-subtitle">Damaged barcode handling</div>                 
+                    <div class="metric-subtitle">Same scan repetition handler</div>
+                    <div class="metric-subtitle">Data handling</div>                 
 
 
                 </div>
@@ -467,7 +477,7 @@
 </svg>
                     </div>
                     <div class="metric-title">Location Accuracy</div>
-                    <div class="metric-subtitle">GPS precision</div>
+                    
                     <div class="metric-subtitle">Geofencing</div>
                     <div class="metric-subtitle">Route information</div>
                 </div>
