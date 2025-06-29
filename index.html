@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FITHSCS Mobile App - CI/CD Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="dashboard-container">
         <!-- Header -->
         <header class="dashboard-header">
             <div class="header-content">
                 <h1>FITHSCS Mobile App</h1>
-                <p class="subtitle">Last Mile Delivery - CI/CD Dashboard</p>
+                <p class="subtitle">CI/CD Dashboard</p>
                 <div class="last-updated">
                     Last Updated: <span id="lastUpdated"></span>
                 </div>
@@ -21,6 +23,18 @@
 
         <!-- KPI Cards -->
         <section class="kpi-section">
+            <div class="remarks-content">
+                <h2>Remarks</h2>
+                <p class="note">The metrics on this page update in real-time
+                    upon each pipeline run. The dashboard provides a comprehensive
+                    overview of the CI/CD pipeline performance, including test
+                    coverage, build status, active branches, and total runs.
+                    It also highlights areas that require attention, such as
+                    test readiness and artifact status.
+                </p>
+
+
+            </div>
             <div class="kpi-grid">
                 <div class="kpi-card critical">
                     <div class="kpi-header">
@@ -82,7 +96,7 @@
                 <h2>Coverage Analysis</h2>
                 <button class="refresh-btn" onclick="refreshData()">Refresh Data</button>
             </div>
-            
+
             <div class="coverage-container">
                 <div class="coverage-chart">
                     <h3>Current vs Target Coverage</h3>
@@ -90,7 +104,7 @@
                         <canvas id="coverageChart"></canvas>
                     </div>
                 </div>
-                
+
                 <div class="coverage-requirements">
                     <h3>Requirements Status</h3>
                     <div class="requirement-list">
@@ -130,7 +144,7 @@
                     <button class="filter-btn" onclick="filterBranch('develop')">Develop</button>
                 </div>
             </div>
-            
+
             <div class="branch-table-container">
                 <table class="branch-table">
                     <thead>
@@ -155,11 +169,12 @@
             <div class="section-header">
                 <h2>Recent Pipeline Activity</h2>
                 <div class="activity-legend">
-                    <span class="legend-item success">Success</span>
-                    <span class="legend-item failed">Failed</span>
+                    <button class="legend-item all active" onclick="filterTimeline('all')">All</button>
+                    <button class="legend-item success" onclick="filterTimeline('success')">Success</button>
+                    <button class="legend-item failed" onclick="filterTimeline('failed')">Failed</button>
                 </div>
             </div>
-            
+
             <div class="activity-timeline">
                 <div id="timelineContainer">
                     <!-- Dynamic content -->
@@ -172,7 +187,7 @@
             <div class="section-header">
                 <h2>Compliance & Reporting</h2>
             </div>
-            
+
             <div class="compliance-grid">
                 <div class="compliance-card">
                     <h3>Test Readiness</h3>
@@ -187,7 +202,7 @@
                         <li class="pending">Version tagged as test-ready</li>
                     </ul>
                 </div>
-                
+
                 <div class="compliance-card">
                     <h3>Artifact Status</h3>
                     <div class="compliance-status success">
@@ -204,7 +219,14 @@
             </div>
         </section>
     </div>
+    <footer class="dashboard-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 FITHSCS Mobile App</p>
+            <p class="company">Netconn Engineering. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="scripts.js"></script>
 </body>
+
 </html>

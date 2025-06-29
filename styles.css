@@ -47,6 +47,17 @@ body {
     padding-top: 15px;
     margin-top: 15px;
 }
+.remarks-content h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.note{
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
 
 /* KPI Section */
 .kpi-section {
@@ -526,6 +537,24 @@ body {
 .compliance-checklist li.pending:before {
     content: '⏳';
 }
+
+.dashboard-footer {
+    background: linear-gradient(135deg, #000000 0%, #333333 100%);
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #4b4b4b;
+    border-radius: 0 0 12px 12px;
+}
+.footer-content p{
+    font-size: 0.9rem;
+    color: white;
+}
+.company {
+    font-weight: 600;
+    margin-top: 10px;
+    color: '#5733FF';
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

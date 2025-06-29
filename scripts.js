@@ -425,6 +425,26 @@ function filterBranch(branchName) {
     });
 }
 
+function filterTimeline(status) {
+    // Update active button
+    document.querySelectorAll('.legend-item').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Filter timeline items
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    timelineItems.forEach(item => {
+        const itemStatus = item.getAttribute('data-status');
+        
+        if (status === 'all' || itemStatus === status) {
+            item.style.display = '';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
 async function refreshData() {
     const button = event.target;
     const originalText = button.textContent;
