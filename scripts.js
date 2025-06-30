@@ -323,87 +323,299 @@ function renderTimeline() {
     timelineContainer.innerHTML = timelineHTML;
 }
 
+// function createCoverageChart() {
+//     const canvas = document.getElementById('coverageChart');
+//     const ctx = canvas.getContext('2d');
+    
+//     // Set canvas size
+//     canvas.width = 400;
+//     canvas.height = 250;
+    
+//     const coverage = dashboardData.latestRun.coverage;
+//     const target = 80;
+    
+//     // Chart data
+//     const metrics = [
+//         { label: 'Lines', current: coverage.lines, target: target, color: '#dc3545' },
+//         { label: 'Functions', current: coverage.functions, target: target, color: '#fd7e14' },
+//         { label: 'Branches', current: coverage.branches, target: target, color: '#ffc107' },
+//         { label: 'Statements', current: coverage.statements, target: target, color: '#6f42c1' }
+//     ];
+    
+//     // Clear canvas
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+//     // Chart dimensions
+//     const chartX = 60;
+//     const chartY = 30;
+//     const chartWidth = 300;
+//     const chartHeight = 180;
+//     const barHeight = 30;
+//     const barSpacing = 15;
+    
+//     // Draw title
+//     ctx.fillStyle = '#333';
+//     ctx.font = 'bold 14px Arial';
+//     ctx.fillText('Coverage Metrics vs 80% Target', chartX, 20);
+    
+//     // Draw bars
+//     metrics.forEach((metric, index) => {
+//         const y = chartY + (index * (barHeight + barSpacing));
+        
+//         // Draw background bar (target)
+//         ctx.fillStyle = '#e9ecef';
+//         ctx.fillRect(chartX + 80, y, chartWidth - 80, barHeight);
+        
+//         // Draw current coverage bar
+//         const currentWidth = ((metric.current / 100) * (chartWidth - 80));
+//         ctx.fillStyle = metric.color;
+//         ctx.fillRect(chartX + 80, y, currentWidth, barHeight);
+        
+//         // Draw target line
+//         const targetX = chartX + 80 + ((target / 100) * (chartWidth - 80));
+//         ctx.strokeStyle = '#000';
+//         ctx.lineWidth = 2;
+//         ctx.beginPath();
+//         ctx.moveTo(targetX, y);
+//         ctx.lineTo(targetX, y + barHeight);
+//         ctx.stroke();
+        
+//         // Draw labels
+//         ctx.fillStyle = '#333';
+//         ctx.font = '12px Arial';
+//         ctx.textAlign = 'right';
+//         ctx.fillText(metric.label, chartX + 70, y + barHeight / 2 + 4);
+        
+//         // Draw percentage
+//         ctx.textAlign = 'left';
+//         ctx.fillText(`${metric.current.toFixed(1)}%`, chartX + 85 + currentWidth, y + barHeight / 2 + 4);
+//     });
+    
+//     // Draw legend
+//     ctx.fillStyle = '#666';
+//     ctx.font = '10px Arial';
+//     ctx.textAlign = 'left';
+//     ctx.fillText('Target: 80%', chartX + 250, chartY + chartHeight + 20);
+    
+//     // Draw target line in legend
+//     ctx.strokeStyle = '#000';
+//     ctx.lineWidth = 2;
+//     ctx.beginPath();
+//     ctx.moveTo(chartX + 240, chartY + chartHeight + 16);
+//     ctx.lineTo(chartX + 248, chartY + chartHeight + 16);
+//     ctx.stroke();
+// }
+
 function createCoverageChart() {
     const canvas = document.getElementById('coverageChart');
     const ctx = canvas.getContext('2d');
     
-    // Set canvas size
-    canvas.width = 400;
-    canvas.height = 250;
+    // Set high-DPI canvas for crisp rendering
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+    
+    // Set canvas display size
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+    
+    // If no explicit size set, use default improved dimensions
+    if (rect.width === 0) {
+        canvas.width = 500 * dpr;
+        canvas.height = 320 * dpr;
+        canvas.style.width = '500px';
+        canvas.style.height = '320px';
+        ctx.scale(dpr, dpr);
+    }
     
     const coverage = dashboardData.latestRun.coverage;
     const target = 80;
     
-    // Chart data
+    // Enhanced chart data with better colors
     const metrics = [
-        { label: 'Lines', current: coverage.lines, target: target, color: '#dc3545' },
-        { label: 'Functions', current: coverage.functions, target: target, color: '#fd7e14' },
-        { label: 'Branches', current: coverage.branches, target: target, color: '#ffc107' },
-        { label: 'Statements', current: coverage.statements, target: target, color: '#6f42c1' }
+        { label: 'Lines', current: coverage.lines, target: target, color: '#e74c3c', bgColor: '#fadbd8' },
+        { label: 'Functions', current: coverage.functions, target: target, color: '#f39c12', bgColor: '#fdeaa7' },
+        { label: 'Branches', current: coverage.branches, target: target, color: '#f1c40f', bgColor: '#fcf3cf' },
+        { label: 'Statements', current: coverage.statements, target: target, color: '#9b59b6', bgColor: '#e8daef' }
     ];
     
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Clear canvas with subtle background
+    ctx.fillStyle = '#fafafa';
+    ctx.fillRect(0, 0, canvas.style.width.replace('px', ''), canvas.style.height.replace('px', ''));
     
-    // Chart dimensions
-    const chartX = 60;
-    const chartY = 30;
-    const chartWidth = 300;
-    const chartHeight = 180;
-    const barHeight = 30;
-    const barSpacing = 15;
+    // Chart dimensions with better spacing
+    const chartX = 80;
+    const chartY = 60;
+    const chartWidth = parseInt(canvas.style.width) - 120;
+    const chartHeight = 200;
+    const barHeight = 35;
+    const barSpacing = 20;
     
-    // Draw title
-    ctx.fillStyle = '#333';
-    ctx.font = 'bold 14px Arial';
-    ctx.fillText('Coverage Metrics vs 80% Target', chartX, 20);
+    // Enable anti-aliasing for smooth text
+    ctx.textBaseline = 'middle';
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
     
-    // Draw bars
+    // Draw main title with better typography
+    ctx.fillStyle = '#2c3e50';
+    ctx.font = 'bold 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Coverage Metrics vs 80% Target', parseInt(canvas.style.width) / 2, 30);
+    
+    // Draw subtitle
+    ctx.fillStyle = '#7f8c8d';
+    ctx.font = '12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText('Current performance against target threshold', parseInt(canvas.style.width) / 2, 50);
+    
+    // Calculate maximum width for proper scaling
+    const maxBarWidth = chartWidth - 120;
+    
+    // Draw bars with enhanced styling
     metrics.forEach((metric, index) => {
         const y = chartY + (index * (barHeight + barSpacing));
         
-        // Draw background bar (target)
-        ctx.fillStyle = '#e9ecef';
-        ctx.fillRect(chartX + 80, y, chartWidth - 80, barHeight);
+        // Draw background bar with rounded corners
+        const bgBarWidth = maxBarWidth;
+        ctx.fillStyle = metric.bgColor;
+        roundRect(ctx, chartX + 120, y, bgBarWidth, barHeight, 4);
+        ctx.fill();
         
-        // Draw current coverage bar
-        const currentWidth = ((metric.current / 100) * (chartWidth - 80));
-        ctx.fillStyle = metric.color;
-        ctx.fillRect(chartX + 80, y, currentWidth, barHeight);
-        
-        // Draw target line
-        const targetX = chartX + 80 + ((target / 100) * (chartWidth - 80));
-        ctx.strokeStyle = '#000';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(targetX, y);
-        ctx.lineTo(targetX, y + barHeight);
+        // Draw border for background bar
+        ctx.strokeStyle = '#ecf0f1';
+        ctx.lineWidth = 1;
+        roundRect(ctx, chartX + 120, y, bgBarWidth, barHeight, 4);
         ctx.stroke();
         
-        // Draw labels
-        ctx.fillStyle = '#333';
-        ctx.font = '12px Arial';
-        ctx.textAlign = 'right';
-        ctx.fillText(metric.label, chartX + 70, y + barHeight / 2 + 4);
+        // Draw current coverage bar with gradient
+        const currentWidth = Math.max(2, (metric.current / 100) * bgBarWidth);
+        const gradient = ctx.createLinearGradient(chartX + 120, y, chartX + 120, y + barHeight);
+        gradient.addColorStop(0, metric.color);
+        gradient.addColorStop(1, shadeColor(metric.color, -20));
+        ctx.fillStyle = gradient;
+        roundRect(ctx, chartX + 120, y, currentWidth, barHeight, 4);
+        ctx.fill();
         
-        // Draw percentage
+        // Draw target line with better styling
+        const targetX = chartX + 120 + (target / 100) * bgBarWidth;
+        ctx.strokeStyle = '#34495e';
+        ctx.lineWidth = 3;
+        ctx.setLineDash([]);
+        ctx.beginPath();
+        ctx.moveTo(targetX, y - 5);
+        ctx.lineTo(targetX, y + barHeight + 5);
+        ctx.stroke();
+        
+        // Draw target indicator
+        ctx.fillStyle = '#34495e';
+        ctx.beginPath();
+        ctx.moveTo(targetX - 4, y - 5);
+        ctx.lineTo(targetX + 4, y - 5);
+        ctx.lineTo(targetX, y - 12);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Draw metric labels with better typography
+        ctx.fillStyle = '#2c3e50';
+        ctx.font = 'bold 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(metric.label, chartX + 110, y + barHeight / 2);
+        
+        // Draw percentage with better positioning
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
         ctx.textAlign = 'left';
-        ctx.fillText(`${metric.current.toFixed(1)}%`, chartX + 85 + currentWidth, y + barHeight / 2 + 4);
+        
+        // Position percentage text intelligently
+        const percentText = `${metric.current.toFixed(1)}%`;
+        const textWidth = ctx.measureText(percentText).width;
+        const textX = currentWidth > textWidth + 20 ? 
+            chartX + 120 + currentWidth - textWidth - 10 : 
+            chartX + 120 + currentWidth + 10;
+        
+        if (currentWidth > textWidth + 20) {
+            ctx.fillStyle = '#ffffff';
+        } else {
+            ctx.fillStyle = '#2c3e50';
+        }
+        
+        ctx.fillText(percentText, textX, y + barHeight / 2);
     });
     
-    // Draw legend
-    ctx.fillStyle = '#666';
-    ctx.font = '10px Arial';
-    ctx.textAlign = 'left';
-    ctx.fillText('Target: 80%', chartX + 250, chartY + chartHeight + 20);
+    // Draw enhanced legend
+    const legendY = chartY + chartHeight + 40;
     
-    // Draw target line in legend
-    ctx.strokeStyle = '#000';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(chartX + 240, chartY + chartHeight + 16);
-    ctx.lineTo(chartX + 248, chartY + chartHeight + 16);
+    // Legend background
+    ctx.fillStyle = '#ecf0f1';
+    roundRect(ctx, chartX, legendY - 10, chartWidth, 40, 8);
+    ctx.fill();
+    
+    // Legend border
+    ctx.strokeStyle = '#bdc3c7';
+    ctx.lineWidth = 1;
+    roundRect(ctx, chartX, legendY - 10, chartWidth, 40, 8);
     ctx.stroke();
+    
+    // Target line legend
+    ctx.strokeStyle = '#34495e';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(chartX + 20, legendY + 10);
+    ctx.lineTo(chartX + 40, legendY + 10);
+    ctx.stroke();
+    
+    // Target indicator in legend
+    ctx.fillStyle = '#34495e';
+    ctx.beginPath();
+    ctx.moveTo(chartX + 30 - 3, legendY + 5);
+    ctx.lineTo(chartX + 30 + 3, legendY + 5);
+    ctx.lineTo(chartX + 30, legendY);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Legend text
+    ctx.fillStyle = '#2c3e50';
+    ctx.font = '12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('Target: 80%', chartX + 50, legendY + 10);
+    
+    // Performance indicator
+    const avgCoverage = (coverage.lines + coverage.functions + coverage.branches + coverage.statements) / 4;
+    const status = avgCoverage >= target ? '✓ Above Target' : '⚠ Below Target';
+    const statusColor = avgCoverage >= target ? '#27ae60' : '#e74c3c';
+    
+    ctx.fillStyle = statusColor;
+    ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(status, chartX + chartWidth - 20, legendY + 10);
+}
+
+// Helper function to create rounded rectangles
+function roundRect(ctx, x, y, width, height, radius) {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+}
+
+// Helper function to darken/lighten colors
+function shadeColor(color, percent) {
+    const num = parseInt(color.replace("#", ""), 16);
+    const amt = Math.round(2.55 * percent);
+    const R = (num >> 16) + amt;
+    const G = (num >> 8 & 0x00FF) + amt;
+    const B = (num & 0x0000FF) + amt;
+    return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+        (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+        (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
 }
 
 function filterBranch(branchName) {
