@@ -3,31 +3,44 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "66",
+    "runNumber": "71",
     "branch": "main",
-    "commit": "a147232e328b3bbee44bf53a43c2864de3a30583",
-    "shortCommit": "a147232",
+    "commit": "0a18b7075cfe8ba9c03edfc8fa569c245aa69e83",
+    "shortCommit": "0a18b70",
     "actor": "brukGit",
-    "timestamp": "2025-06-29T08:46:48.202Z",
+    "timestamp": "2025-06-30T13:14:36.838Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/15953406112",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/15973803802",
     "coverage": {
-      "lines": 7.28,
-      "functions": 8.7,
-      "branches": 6,
-      "statements": 7.46
+      "lines": 4.38,
+      "functions": 6.06,
+      "branches": 3.85,
+      "statements": 4.61
     }
   },
   "stats": {
-    "totalRuns": 59,
+    "totalRuns": 63,
     "totalBranches": 7,
-    "successRate": 89.8
+    "successRate": 90.5
   },
   "branches": {
     "main": {
-      "totalRuns": 37,
-      "successfulRuns": 34,
+      "totalRuns": 38,
+      "successfulRuns": 35,
       "runs": [
+        {
+          "runNumber": "71",
+          "status": "success",
+          "timestamp": "2025-06-30T13:14:36.832Z",
+          "duration": 50,
+          "error": null,
+          "coverage": {
+            "lines": 4.38,
+            "functions": 6.06,
+            "branches": 3.85,
+            "statements": 4.61
+          }
+        },
         {
           "runNumber": "66",
           "status": "success",
@@ -172,9 +185,48 @@
       ]
     },
     "left": {
-      "totalRuns": 3,
-      "successfulRuns": 3,
+      "totalRuns": 6,
+      "successfulRuns": 6,
       "runs": [
+        {
+          "runNumber": "69",
+          "status": "success",
+          "timestamp": "2025-06-30T12:56:18.086Z",
+          "duration": 48,
+          "error": null,
+          "coverage": {
+            "lines": 4.38,
+            "functions": 6.06,
+            "branches": 3.85,
+            "statements": 4.61
+          }
+        },
+        {
+          "runNumber": "68",
+          "status": "success",
+          "timestamp": "2025-06-29T14:36:37.764Z",
+          "duration": 52,
+          "error": null,
+          "coverage": {
+            "lines": 7.41,
+            "functions": 8.74,
+            "branches": 6.06,
+            "statements": 7.58
+          }
+        },
+        {
+          "runNumber": "67",
+          "status": "success",
+          "timestamp": "2025-06-29T13:17:14.585Z",
+          "duration": 73,
+          "error": null,
+          "coverage": {
+            "lines": 7.28,
+            "functions": 8.68,
+            "branches": 5.99,
+            "statements": 7.46
+          }
+        },
         {
           "runNumber": "64",
           "status": "success",
