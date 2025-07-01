@@ -3,25 +3,25 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "83",
-    "branch": "main",
-    "commit": "e6cf086e470a005b933e40d81ad1eae9d1aac6e5",
-    "shortCommit": "e6cf086",
+    "runNumber": "84",
+    "branch": "left",
+    "commit": "a1369bcc8ae3b37002278138c7718540574459c1",
+    "shortCommit": "a1369bc",
     "actor": "brukGit",
-    "timestamp": "2025-07-01T15:46:34.877Z",
+    "timestamp": "2025-07-01T22:33:13.135Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16003927573",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16011496884",
     "coverage": {
-      "lines": 4.7,
-      "functions": 6.19,
-      "branches": 3.93,
-      "statements": 4.9
+      "lines": 4.3,
+      "functions": 5.64,
+      "branches": 2.82,
+      "statements": 4.51
     }
   },
   "stats": {
-    "totalRuns": 75,
+    "totalRuns": 76,
     "totalBranches": 11,
-    "successRate": 92
+    "successRate": 92.1
   },
   "branches": {
     "main": {
@@ -223,9 +223,22 @@
       ]
     },
     "left": {
-      "totalRuns": 10,
-      "successfulRuns": 10,
+      "totalRuns": 11,
+      "successfulRuns": 11,
       "runs": [
+        {
+          "runNumber": "84",
+          "status": "success",
+          "timestamp": "2025-07-01T22:33:13.002Z",
+          "duration": 32,
+          "error": null,
+          "coverage": {
+            "lines": 4.3,
+            "functions": 5.64,
+            "branches": 2.82,
+            "statements": 4.51
+          }
+        },
         {
           "runNumber": "81",
           "status": "success",
@@ -335,13 +348,6 @@
           "status": "success",
           "timestamp": "2025-06-28T19:34:48.823Z",
           "duration": 68,
-          "error": null
-        },
-        {
-          "runNumber": "52",
-          "status": "success",
-          "timestamp": "2025-06-28T19:23:27.807Z",
-          "duration": 58,
           "error": null
         }
       ]
