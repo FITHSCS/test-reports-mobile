@@ -3,25 +3,25 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "87",
+    "runNumber": "88",
     "branch": "left",
-    "commit": "c873be3b37e3a9d56165c95a3ebba65d103b4238",
-    "shortCommit": "c873be3",
+    "commit": "f39dcfce7a1ca842de57086475183b4b2f4fa435",
+    "shortCommit": "f39dcfc",
     "actor": "brukGit",
-    "timestamp": "2025-07-02T10:54:58.048Z",
+    "timestamp": "2025-07-02T12:00:27.520Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16023084126",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16024396155",
     "coverage": {
       "lines": 4.28,
       "functions": 5.45,
-      "branches": 2.81,
+      "branches": 2.82,
       "statements": 4.47
     }
   },
   "stats": {
-    "totalRuns": 79,
+    "totalRuns": 80,
     "totalBranches": 11,
-    "successRate": 92.4
+    "successRate": 92.5
   },
   "branches": {
     "main": {
@@ -223,9 +223,22 @@
       ]
     },
     "left": {
-      "totalRuns": 14,
-      "successfulRuns": 14,
+      "totalRuns": 15,
+      "successfulRuns": 15,
       "runs": [
+        {
+          "runNumber": "88",
+          "status": "success",
+          "timestamp": "2025-07-02T12:00:27.514Z",
+          "duration": 26,
+          "error": null,
+          "coverage": {
+            "lines": 4.28,
+            "functions": 5.45,
+            "branches": 2.82,
+            "statements": 4.47
+          }
+        },
         {
           "runNumber": "87",
           "status": "success",
@@ -341,19 +354,6 @@
             "functions": 6.06,
             "branches": 3.85,
             "statements": 4.61
-          }
-        },
-        {
-          "runNumber": "68",
-          "status": "success",
-          "timestamp": "2025-06-29T14:36:37.764Z",
-          "duration": 52,
-          "error": null,
-          "coverage": {
-            "lines": 7.41,
-            "functions": 8.74,
-            "branches": 6.06,
-            "statements": 7.58
           }
         }
       ]
