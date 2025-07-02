@@ -3,14 +3,14 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "89",
-    "branch": "left",
-    "commit": "8031451f0b7f629f60c4f4b08639627fdca95280",
-    "shortCommit": "8031451",
+    "runNumber": "90",
+    "branch": "54/merge",
+    "commit": "776a5be8636dc9ae396183e5e0cfcb0f42673058",
+    "shortCommit": "776a5be",
     "actor": "brukGit",
-    "timestamp": "2025-07-02T16:29:06.197Z",
+    "timestamp": "2025-07-02T16:29:30.463Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16030511243",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16030520006",
     "coverage": {
       "lines": 4.11,
       "functions": 5.09,
@@ -19,9 +19,9 @@
     }
   },
   "stats": {
-    "totalRuns": 81,
-    "totalBranches": 11,
-    "successRate": 92.6
+    "totalRuns": 82,
+    "totalBranches": 12,
+    "successRate": 92.7
   },
   "branches": {
     "main": {
@@ -479,6 +479,26 @@
             "functions": 6.19,
             "branches": 3.93,
             "statements": 4.9
+          }
+        }
+      ],
+      "folderStructure": {}
+    },
+    "54/merge": {
+      "totalRuns": 1,
+      "successfulRuns": 1,
+      "runs": [
+        {
+          "runNumber": "90",
+          "status": "success",
+          "timestamp": "2025-07-02T16:29:30.457Z",
+          "duration": 23,
+          "error": null,
+          "coverage": {
+            "lines": 4.11,
+            "functions": 5.09,
+            "branches": 2.67,
+            "statements": 4.29
           }
         }
       ],
