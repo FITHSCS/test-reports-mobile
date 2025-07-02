@@ -3,14 +3,14 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "90",
-    "branch": "54/merge",
-    "commit": "776a5be8636dc9ae396183e5e0cfcb0f42673058",
-    "shortCommit": "776a5be",
+    "runNumber": "91",
+    "branch": "main",
+    "commit": "001c960785079a8f72481c92558217fba7fe1628",
+    "shortCommit": "001c960",
     "actor": "brukGit",
-    "timestamp": "2025-07-02T16:29:30.463Z",
+    "timestamp": "2025-07-02T16:29:45.516Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16030520006",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16030523934",
     "coverage": {
       "lines": 4.11,
       "functions": 5.09,
@@ -19,15 +19,28 @@
     }
   },
   "stats": {
-    "totalRuns": 82,
+    "totalRuns": 83,
     "totalBranches": 12,
-    "successRate": 92.7
+    "successRate": 92.8
   },
   "branches": {
     "main": {
-      "totalRuns": 42,
-      "successfulRuns": 39,
+      "totalRuns": 43,
+      "successfulRuns": 40,
       "runs": [
+        {
+          "runNumber": "91",
+          "status": "success",
+          "timestamp": "2025-07-02T16:29:45.508Z",
+          "duration": 41,
+          "error": null,
+          "coverage": {
+            "lines": 4.11,
+            "functions": 5.09,
+            "branches": 2.67,
+            "statements": 4.29
+          }
+        },
         {
           "runNumber": "83",
           "status": "success",
@@ -126,13 +139,6 @@
           "timestamp": "2025-06-28T16:30:22Z",
           "duration": 42,
           "error": null
-        },
-        {
-          "runNumber": "49",
-          "status": "failed",
-          "timestamp": "2025-06-28T14:15:33Z",
-          "duration": 38,
-          "error": "Test failed: Authentication module - Expected status 200 but got 401"
         }
       ],
       "folderStructure": {
