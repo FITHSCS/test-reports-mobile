@@ -3,23 +3,23 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "92",
+    "runNumber": "93",
     "branch": "left",
-    "commit": "f0798cc3c7a951da3939cee6cd64a08f85ecb2ff",
-    "shortCommit": "f0798cc",
+    "commit": "c5566e6bafd25d1168e7d4e631c85219671f99df",
+    "shortCommit": "c5566e6",
     "actor": "brukGit",
-    "timestamp": "2025-07-03T10:43:10.857Z",
+    "timestamp": "2025-07-03T16:54:53.461Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16048193461",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16056163783",
     "coverage": {
-      "lines": 4.1,
-      "functions": 5.06,
-      "branches": 2.66,
-      "statements": 4.28
+      "lines": 3.76,
+      "functions": 4.44,
+      "branches": 2.46,
+      "statements": 3.9
     }
   },
   "stats": {
-    "totalRuns": 84,
+    "totalRuns": 85,
     "totalBranches": 12,
     "successRate": 92.9
   },
@@ -229,9 +229,22 @@
       ]
     },
     "left": {
-      "totalRuns": 17,
-      "successfulRuns": 17,
+      "totalRuns": 18,
+      "successfulRuns": 18,
       "runs": [
+        {
+          "runNumber": "93",
+          "status": "success",
+          "timestamp": "2025-07-03T16:54:53.402Z",
+          "duration": 24,
+          "error": null,
+          "coverage": {
+            "lines": 3.76,
+            "functions": 4.44,
+            "branches": 2.46,
+            "statements": 3.9
+          }
+        },
         {
           "runNumber": "92",
           "status": "success",
@@ -347,19 +360,6 @@
             "functions": 6.2,
             "branches": 3.93,
             "statements": 4.89
-          }
-        },
-        {
-          "runNumber": "75",
-          "status": "success",
-          "timestamp": "2025-06-30T21:42:26.401Z",
-          "duration": 26,
-          "error": null,
-          "coverage": {
-            "lines": 4.86,
-            "functions": 6.49,
-            "branches": 4.16,
-            "statements": 5.07
           }
         }
       ]
