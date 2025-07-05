@@ -3,25 +3,25 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "101",
+    "runNumber": "102",
     "branch": "left",
-    "commit": "00f4026c8dad7cac7fbf7d01a177001443568840",
-    "shortCommit": "00f4026",
+    "commit": "ad40aca802bb06ad035b9c150d33929ea84def35",
+    "shortCommit": "ad40aca",
     "actor": "brukGit",
-    "timestamp": "2025-07-04T21:07:24.236Z",
+    "timestamp": "2025-07-05T15:07:44.013Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16080867313",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16089305740",
     "coverage": {
-      "lines": 3.56,
-      "functions": 4.13,
-      "branches": 2.3,
-      "statements": 3.69
+      "lines": 3.54,
+      "functions": 4.14,
+      "branches": 2.26,
+      "statements": 3.66
     }
   },
   "stats": {
-    "totalRuns": 93,
+    "totalRuns": 94,
     "totalBranches": 14,
-    "successRate": 93.5
+    "successRate": 93.6
   },
   "branches": {
     "main": {
@@ -241,9 +241,22 @@
       ]
     },
     "left": {
-      "totalRuns": 22,
-      "successfulRuns": 22,
+      "totalRuns": 23,
+      "successfulRuns": 23,
       "runs": [
+        {
+          "runNumber": "102",
+          "status": "success",
+          "timestamp": "2025-07-05T15:07:43.940Z",
+          "duration": 50,
+          "error": null,
+          "coverage": {
+            "lines": 3.54,
+            "functions": 4.14,
+            "branches": 2.26,
+            "statements": 3.66
+          }
+        },
         {
           "runNumber": "101",
           "status": "success",
@@ -359,19 +372,6 @@
             "functions": 5.45,
             "branches": 2.81,
             "statements": 4.47
-          }
-        },
-        {
-          "runNumber": "86",
-          "status": "success",
-          "timestamp": "2025-07-02T09:34:58.303Z",
-          "duration": 73,
-          "error": null,
-          "coverage": {
-            "lines": 4.31,
-            "functions": 5.52,
-            "branches": 2.81,
-            "statements": 4.5
           }
         }
       ]
