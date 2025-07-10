@@ -3,25 +3,25 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "126",
+    "runNumber": "127",
     "branch": "left",
-    "commit": "543120d9abedd86cda44313c709678ebbc0f7c1a",
-    "shortCommit": "543120d",
+    "commit": "192794858778d218bfd9851e8697a61288358d74",
+    "shortCommit": "1927948",
     "actor": "brukGit",
-    "timestamp": "2025-07-10T02:55:21.934Z",
+    "timestamp": "2025-07-10T07:01:24.883Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16184953243",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16188259319",
     "coverage": {
       "lines": 3.16,
-      "functions": 3.62,
+      "functions": 3.61,
       "branches": 2.02,
       "statements": 3.26
     }
   },
   "stats": {
-    "totalRuns": 118,
+    "totalRuns": 119,
     "totalBranches": 16,
-    "successRate": 94.9
+    "successRate": 95
   },
   "branches": {
     "main": {
@@ -247,9 +247,22 @@
       ]
     },
     "left": {
-      "totalRuns": 43,
-      "successfulRuns": 43,
+      "totalRuns": 44,
+      "successfulRuns": 44,
       "runs": [
+        {
+          "runNumber": "127",
+          "status": "success",
+          "timestamp": "2025-07-10T07:01:24.811Z",
+          "duration": 40,
+          "error": null,
+          "coverage": {
+            "lines": 3.16,
+            "functions": 3.61,
+            "branches": 2.02,
+            "statements": 3.26
+          }
+        },
         {
           "runNumber": "126",
           "status": "success",
@@ -365,19 +378,6 @@
             "functions": 3.64,
             "branches": 2.04,
             "statements": 3.28
-          }
-        },
-        {
-          "runNumber": "115",
-          "status": "success",
-          "timestamp": "2025-07-08T22:47:43.061Z",
-          "duration": 36,
-          "error": null,
-          "coverage": {
-            "lines": 3.19,
-            "functions": 3.65,
-            "branches": 2.04,
-            "statements": 3.29
           }
         }
       ]
