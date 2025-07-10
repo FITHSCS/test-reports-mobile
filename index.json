@@ -3,23 +3,23 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "130",
+    "runNumber": "131",
     "branch": "left",
-    "commit": "1c10d44b2576a07a940d049345bbd1d058390210",
-    "shortCommit": "1c10d44",
+    "commit": "62995fd85f766107dd64e489c76a8107faa8f547",
+    "shortCommit": "62995fd",
     "actor": "brukGit",
-    "timestamp": "2025-07-10T10:38:37.083Z",
+    "timestamp": "2025-07-10T13:53:17.427Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16192748029",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16196903099",
     "coverage": {
-      "lines": 3.15,
-      "functions": 3.6,
+      "lines": 3.16,
+      "functions": 3.62,
       "branches": 2.07,
-      "statements": 3.25
+      "statements": 3.26
     }
   },
   "stats": {
-    "totalRuns": 122,
+    "totalRuns": 123,
     "totalBranches": 16,
     "successRate": 95.1
   },
@@ -247,9 +247,22 @@
       ]
     },
     "left": {
-      "totalRuns": 47,
-      "successfulRuns": 47,
+      "totalRuns": 48,
+      "successfulRuns": 48,
       "runs": [
+        {
+          "runNumber": "131",
+          "status": "success",
+          "timestamp": "2025-07-10T13:53:17.352Z",
+          "duration": 36,
+          "error": null,
+          "coverage": {
+            "lines": 3.16,
+            "functions": 3.62,
+            "branches": 2.07,
+            "statements": 3.26
+          }
+        },
         {
           "runNumber": "130",
           "status": "success",
@@ -359,19 +372,6 @@
           "status": "success",
           "timestamp": "2025-07-09T19:24:06.693Z",
           "duration": 34,
-          "error": null,
-          "coverage": {
-            "lines": 3.18,
-            "functions": 3.65,
-            "branches": 2.04,
-            "statements": 3.28
-          }
-        },
-        {
-          "runNumber": "119",
-          "status": "success",
-          "timestamp": "2025-07-09T17:04:17.197Z",
-          "duration": 59,
           "error": null,
           "coverage": {
             "lines": 3.18,
