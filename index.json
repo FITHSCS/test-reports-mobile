@@ -3,14 +3,14 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "127",
+    "runNumber": "128",
     "branch": "left",
-    "commit": "192794858778d218bfd9851e8697a61288358d74",
-    "shortCommit": "1927948",
+    "commit": "07415ca814af9384bccbe5bc7edd0087eaa12b41",
+    "shortCommit": "07415ca",
     "actor": "brukGit",
-    "timestamp": "2025-07-10T07:01:24.883Z",
+    "timestamp": "2025-07-10T07:09:58.103Z",
     "status": "success",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16188259319",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16188407050",
     "coverage": {
       "lines": 3.16,
       "functions": 3.61,
@@ -19,7 +19,7 @@
     }
   },
   "stats": {
-    "totalRuns": 119,
+    "totalRuns": 120,
     "totalBranches": 16,
     "successRate": 95
   },
@@ -247,9 +247,22 @@
       ]
     },
     "left": {
-      "totalRuns": 44,
-      "successfulRuns": 44,
+      "totalRuns": 45,
+      "successfulRuns": 45,
       "runs": [
+        {
+          "runNumber": "128",
+          "status": "success",
+          "timestamp": "2025-07-10T07:09:58.100Z",
+          "duration": 51,
+          "error": null,
+          "coverage": {
+            "lines": 3.16,
+            "functions": 3.61,
+            "branches": 2.02,
+            "statements": 3.26
+          }
+        },
         {
           "runNumber": "127",
           "status": "success",
@@ -359,19 +372,6 @@
           "status": "success",
           "timestamp": "2025-07-09T07:45:04.831Z",
           "duration": 27,
-          "error": null,
-          "coverage": {
-            "lines": 3.18,
-            "functions": 3.64,
-            "branches": 2.04,
-            "statements": 3.28
-          }
-        },
-        {
-          "runNumber": "116",
-          "status": "success",
-          "timestamp": "2025-07-09T06:52:08.016Z",
-          "duration": 25,
           "error": null,
           "coverage": {
             "lines": 3.18,
