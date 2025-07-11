@@ -3,14 +3,14 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "137",
-    "branch": "main",
-    "commit": "bd1d01cdb7aad3e9f0dab0a87b67c8bdd11993ef",
-    "shortCommit": "bd1d01c",
+    "runNumber": "138",
+    "branch": "left",
+    "commit": "48b57112ced4e8e2d3d45a5ee99cc42bfabe66c8",
+    "shortCommit": "48b5711",
     "actor": "brukGit",
-    "timestamp": "2025-07-11T01:23:59.256Z",
+    "timestamp": "2025-07-11T02:05:50.338Z",
     "status": "unknown",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16209630762",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16210139129",
     "coverage": {
       "lines": 0,
       "functions": 0,
@@ -19,9 +19,9 @@
     }
   },
   "stats": {
-    "totalRuns": 129,
+    "totalRuns": 130,
     "totalBranches": 17,
-    "successRate": 91.5
+    "successRate": 90.8
   },
   "branches": {
     "main": {
@@ -247,9 +247,22 @@
       ]
     },
     "left": {
-      "totalRuns": 52,
+      "totalRuns": 53,
       "successfulRuns": 49,
       "runs": [
+        {
+          "runNumber": "138",
+          "status": "unknown",
+          "timestamp": "2025-07-11T02:05:50.337Z",
+          "duration": 26,
+          "error": null,
+          "coverage": {
+            "lines": 0,
+            "functions": 0,
+            "branches": 0,
+            "statements": 0
+          }
+        },
         {
           "runNumber": "135",
           "status": "unknown",
@@ -363,19 +376,6 @@
           "coverage": {
             "lines": 3.16,
             "functions": 3.61,
-            "branches": 2.02,
-            "statements": 3.26
-          }
-        },
-        {
-          "runNumber": "126",
-          "status": "success",
-          "timestamp": "2025-07-10T02:55:21.930Z",
-          "duration": 39,
-          "error": null,
-          "coverage": {
-            "lines": 3.16,
-            "functions": 3.62,
             "branches": 2.02,
             "statements": 3.26
           }
