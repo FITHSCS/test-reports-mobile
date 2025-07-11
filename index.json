@@ -3,14 +3,14 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "134",
+    "runNumber": "135",
     "branch": "left",
-    "commit": "14c99979c3f0a722f7407dd56dc7dc6bce9b7473",
-    "shortCommit": "14c9997",
+    "commit": "43432a48b7f41bac905e3a2acc4441e1715ff28e",
+    "shortCommit": "43432a4",
     "actor": "brukGit",
-    "timestamp": "2025-07-10T23:28:35.089Z",
+    "timestamp": "2025-07-11T01:22:46.449Z",
     "status": "unknown",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16208157236",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16209615340",
     "coverage": {
       "lines": 0,
       "functions": 0,
@@ -19,9 +19,9 @@
     }
   },
   "stats": {
-    "totalRuns": 126,
+    "totalRuns": 127,
     "totalBranches": 16,
-    "successRate": 93.7
+    "successRate": 92.9
   },
   "branches": {
     "main": {
@@ -247,9 +247,22 @@
       ]
     },
     "left": {
-      "totalRuns": 51,
+      "totalRuns": 52,
       "successfulRuns": 49,
       "runs": [
+        {
+          "runNumber": "135",
+          "status": "unknown",
+          "timestamp": "2025-07-11T01:22:46.354Z",
+          "duration": 42,
+          "error": null,
+          "coverage": {
+            "lines": 0,
+            "functions": 0,
+            "branches": 0,
+            "statements": 0
+          }
+        },
         {
           "runNumber": "134",
           "status": "unknown",
@@ -359,19 +372,6 @@
           "status": "success",
           "timestamp": "2025-07-10T02:55:21.930Z",
           "duration": 39,
-          "error": null,
-          "coverage": {
-            "lines": 3.16,
-            "functions": 3.62,
-            "branches": 2.02,
-            "statements": 3.26
-          }
-        },
-        {
-          "runNumber": "125",
-          "status": "success",
-          "timestamp": "2025-07-10T02:53:29.796Z",
-          "duration": 29,
           "error": null,
           "coverage": {
             "lines": 3.16,
