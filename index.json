@@ -3,14 +3,14 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "141",
-    "branch": "main",
-    "commit": "6d087add6d59299d81bb91aff505efc979b2f9e8",
-    "shortCommit": "6d087ad",
+    "runNumber": "142",
+    "branch": "left",
+    "commit": "d3034b4db050e1be75aae906ad575b032340dba8",
+    "shortCommit": "d3034b4",
     "actor": "brukGit",
-    "timestamp": "2025-07-12T20:34:20.871Z",
+    "timestamp": "2025-07-12T22:52:39.007Z",
     "status": "unknown",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16241645496",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16242664839",
     "coverage": {
       "lines": 0,
       "functions": 0,
@@ -19,9 +19,9 @@
     }
   },
   "stats": {
-    "totalRuns": 133,
+    "totalRuns": 134,
     "totalBranches": 18,
-    "successRate": 88.7
+    "successRate": 88.1
   },
   "branches": {
     "main": {
@@ -247,9 +247,22 @@
       ]
     },
     "left": {
-      "totalRuns": 54,
+      "totalRuns": 55,
       "successfulRuns": 49,
       "runs": [
+        {
+          "runNumber": "142",
+          "status": "unknown",
+          "timestamp": "2025-07-12T22:52:38.954Z",
+          "duration": 55,
+          "error": null,
+          "coverage": {
+            "lines": 0,
+            "functions": 0,
+            "branches": 0,
+            "statements": 0
+          }
+        },
         {
           "runNumber": "139",
           "status": "unknown",
@@ -364,19 +377,6 @@
             "lines": 3.16,
             "functions": 3.62,
             "branches": 2.08,
-            "statements": 3.26
-          }
-        },
-        {
-          "runNumber": "128",
-          "status": "success",
-          "timestamp": "2025-07-10T07:09:58.100Z",
-          "duration": 51,
-          "error": null,
-          "coverage": {
-            "lines": 3.16,
-            "functions": 3.61,
-            "branches": 2.02,
             "statements": 3.26
           }
         }
