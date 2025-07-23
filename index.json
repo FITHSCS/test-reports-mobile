@@ -3,14 +3,14 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "161",
+    "runNumber": "162",
     "branch": "left",
-    "commit": "7d4af7a061246960926f2af7961b7f5dfa07838a",
-    "shortCommit": "7d4af7a",
+    "commit": "e08ef6d26fce7ba1a8a5c50ad126c0d02e8f485b",
+    "shortCommit": "e08ef6d",
     "actor": "brukGit",
-    "timestamp": "2025-07-23T08:39:41.769Z",
+    "timestamp": "2025-07-23T20:03:15.565Z",
     "status": "unknown",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16465364874",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16480270447",
     "coverage": {
       "lines": 0,
       "functions": 0,
@@ -19,9 +19,9 @@
     }
   },
   "stats": {
-    "totalRuns": 153,
+    "totalRuns": 154,
     "totalBranches": 20,
-    "successRate": 77.1
+    "successRate": 76.6
   },
   "branches": {
     "main": {
@@ -247,9 +247,22 @@
       ]
     },
     "left": {
-      "totalRuns": 70,
+      "totalRuns": 71,
       "successfulRuns": 49,
       "runs": [
+        {
+          "runNumber": "162",
+          "status": "unknown",
+          "timestamp": "2025-07-23T20:03:15.200Z",
+          "duration": 79,
+          "error": null,
+          "coverage": {
+            "lines": 0,
+            "functions": 0,
+            "branches": 0,
+            "statements": 0
+          }
+        },
         {
           "runNumber": "161",
           "status": "unknown",
@@ -359,19 +372,6 @@
           "status": "unknown",
           "timestamp": "2025-07-20T22:48:32.940Z",
           "duration": 61,
-          "error": null,
-          "coverage": {
-            "lines": 0,
-            "functions": 0,
-            "branches": 0,
-            "statements": 0
-          }
-        },
-        {
-          "runNumber": "150",
-          "status": "unknown",
-          "timestamp": "2025-07-19T07:20:27.789Z",
-          "duration": 21,
           "error": null,
           "coverage": {
             "lines": 0,
