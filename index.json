@@ -3,14 +3,14 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "166",
-    "branch": "main",
-    "commit": "1c231bbcd5920b3ecbc98433ef18da50261e85a9",
-    "shortCommit": "1c231bb",
+    "runNumber": "167",
+    "branch": "left",
+    "commit": "321b7c663bcf1c8c5374605a402405d07c730ca3",
+    "shortCommit": "321b7c6",
     "actor": "brukGit",
-    "timestamp": "2025-07-24T11:05:06.087Z",
+    "timestamp": "2025-07-24T11:22:58.150Z",
     "status": "unknown",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16494752823",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16495106027",
     "coverage": {
       "lines": 0,
       "functions": 0,
@@ -19,9 +19,9 @@
     }
   },
   "stats": {
-    "totalRuns": 158,
+    "totalRuns": 159,
     "totalBranches": 21,
-    "successRate": 74.7
+    "successRate": 74.2
   },
   "branches": {
     "main": {
@@ -247,9 +247,22 @@
       ]
     },
     "left": {
-      "totalRuns": 73,
+      "totalRuns": 74,
       "successfulRuns": 49,
       "runs": [
+        {
+          "runNumber": "167",
+          "status": "unknown",
+          "timestamp": "2025-07-24T11:22:58.145Z",
+          "duration": 54,
+          "error": null,
+          "coverage": {
+            "lines": 0,
+            "functions": 0,
+            "branches": 0,
+            "statements": 0
+          }
+        },
         {
           "runNumber": "164",
           "status": "unknown",
@@ -359,19 +372,6 @@
           "status": "unknown",
           "timestamp": "2025-07-22T14:57:47.092Z",
           "duration": 75,
-          "error": null,
-          "coverage": {
-            "lines": 0,
-            "functions": 0,
-            "branches": 0,
-            "statements": 0
-          }
-        },
-        {
-          "runNumber": "153",
-          "status": "unknown",
-          "timestamp": "2025-07-22T10:43:23.990Z",
-          "duration": 69,
           "error": null,
           "coverage": {
             "lines": 0,
