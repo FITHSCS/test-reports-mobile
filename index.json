@@ -3,14 +3,14 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "324",
-    "branch": "main",
-    "commit": "fbfe5e2c13d413cd0e1502f7b1b25f435a3aebc4",
-    "shortCommit": "fbfe5e2",
+    "runNumber": "325",
+    "branch": "left",
+    "commit": "e89c777a66c00f8f4894f4aa6738b40fae7f5898",
+    "shortCommit": "e89c777",
     "actor": "brukGit",
-    "timestamp": "2026-01-28T08:16:09.790Z",
-    "status": "failed",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/21430263815",
+    "timestamp": "2026-01-28T09:52:13.764Z",
+    "status": "success",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/21433333016",
     "coverage": {
       "lines": 0,
       "functions": 0,
@@ -19,9 +19,9 @@
     }
   },
   "stats": {
-    "totalRuns": 178,
+    "totalRuns": 179,
     "totalBranches": 24,
-    "successRate": 66.9
+    "successRate": 67
   },
   "branches": {
     "main": {
@@ -209,9 +209,22 @@
       ]
     },
     "left": {
-      "totalRuns": 85,
-      "successfulRuns": 49,
+      "totalRuns": 86,
+      "successfulRuns": 50,
       "runs": [
+        {
+          "runNumber": "325",
+          "status": "success",
+          "timestamp": "2026-01-28T09:52:13.754Z",
+          "duration": 36,
+          "error": null,
+          "coverage": {
+            "lines": 0,
+            "functions": 0,
+            "branches": 0,
+            "statements": 0
+          }
+        },
         {
           "runNumber": "184",
           "status": "unknown",
@@ -321,19 +334,6 @@
           "status": "unknown",
           "timestamp": "2025-07-25T02:24:06.636Z",
           "duration": 60,
-          "error": null,
-          "coverage": {
-            "lines": 0,
-            "functions": 0,
-            "branches": 0,
-            "statements": 0
-          }
-        },
-        {
-          "runNumber": "169",
-          "status": "unknown",
-          "timestamp": "2025-07-24T16:31:37.469Z",
-          "duration": 36,
           "error": null,
           "coverage": {
             "lines": 0,
