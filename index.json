@@ -3,14 +3,14 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "184",
-    "branch": "left",
-    "commit": "014648d5958c630b5bcbb70c02740fe27eaa7d9b",
-    "shortCommit": "014648d",
+    "runNumber": "323",
+    "branch": "main",
+    "commit": "d63976deba17fea12b71d88f58d97b6312ab82ad",
+    "shortCommit": "d63976d",
     "actor": "brukGit",
-    "timestamp": "2025-07-27T20:07:53.960Z",
-    "status": "unknown",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/16554862123",
+    "timestamp": "2026-01-28T07:44:52.895Z",
+    "status": "success",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/21429175564",
     "coverage": {
       "lines": 0,
       "functions": 0,
@@ -19,15 +19,28 @@
     }
   },
   "stats": {
-    "totalRuns": 176,
+    "totalRuns": 177,
     "totalBranches": 24,
-    "successRate": 67
+    "successRate": 67.2
   },
   "branches": {
     "main": {
-      "totalRuns": 55,
-      "successfulRuns": 44,
+      "totalRuns": 56,
+      "successfulRuns": 45,
       "runs": [
+        {
+          "runNumber": "323",
+          "status": "success",
+          "timestamp": "2026-01-28T07:44:52.834Z",
+          "duration": 63,
+          "error": null,
+          "coverage": {
+            "lines": 0,
+            "functions": 0,
+            "branches": 0,
+            "statements": 0
+          }
+        },
         {
           "runNumber": "183",
           "status": "unknown",
@@ -144,60 +157,9 @@
             "branches": 2.02,
             "statements": 3.26
           }
-        },
-        {
-          "runNumber": "111",
-          "status": "success",
-          "timestamp": "2025-07-08T12:40:38.778Z",
-          "duration": 69,
-          "error": null,
-          "coverage": {
-            "lines": 3.66,
-            "functions": 4.39,
-            "branches": 2.44,
-            "statements": 3.79
-          }
         }
       ],
-      "folderStructure": {
-        "src": {
-          "description": "Source code directory",
-          "structure": {
-            "components": {
-              "description": "React Native components"
-            },
-            "screens": {
-              "description": "App screens"
-            },
-            "services": {
-              "description": "API and service functions"
-            },
-            "utils": {
-              "description": "Utility functions"
-            }
-          }
-        },
-        "tests": {
-          "description": "Test files",
-          "structure": {
-            "unit": {
-              "description": "Unit tests"
-            },
-            "integration": {
-              "description": "Integration tests"
-            },
-            "e2e": {
-              "description": "End-to-end tests"
-            }
-          }
-        },
-        "docs": {
-          "description": "Documentation files"
-        },
-        "config": {
-          "description": "Configuration files"
-        }
-      }
+      "folderStructure": {}
     },
     "develop": {
       "totalRuns": 12,
