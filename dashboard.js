@@ -101,27 +101,17 @@ async function loadDashboard() {
  * @param {object} data - The dashboard data.
  */
 function updateKPIStats(data) {
-    // Total runs
     document.getElementById('total-runs').textContent = data.stats?.totalRuns || 0;
+    
+    // Use 1 decimal place for success rate if it's not a whole number
+    const rawSuccess = data.stats?.successRate || 0;
+    document.getElementById('success-rate').textContent = 
+        (rawSuccess % 1 === 0 ? rawSuccess : rawSuccess.toFixed(1)) + '%';
 
-    // Total branches
-    document.getElementById('total-branches').textContent = data.stats?.totalBranches || 0;
-
-    // Success rate with trend indicator
-    const successRate = Math.round(data.stats?.successRate || 0);
-    document.getElementById('success-rate').textContent = successRate + '%';
-
-    const successTrendKpiEl = document.getElementById('rate-trend-kpi');
-    updateTrendIndicator(successTrendKpiEl, successRate, 90, 70); // Thresholds for Success Rate
-
-    // Last updated with relative time
+    // Update the Last Updated text in the header
     if (data.generated) {
-        const lastUpdate = new Date(data.generated);
-        const now = new Date();
-        const diffMinutes = Math.floor((now - lastUpdate) / (1000 * 60));
-
-        // Update the timestamp in the header
-        document.getElementById('last-updated').textContent = `Last updated: ${formatRelativeTime(diffMinutes)}`;
+        const date = new Date(data.generated);
+        document.getElementById('lastUpdated').textContent = date.toLocaleString();
     }
 }
 
@@ -360,57 +350,34 @@ function addChartInteractivity(svg) {
  * Renders coverage metric cards.
  * @param {object} data - The dashboard data.
  */
+/**
+ * Renders coverage with decimal precision.
+ */
 function renderCoverageCards(data) {
-    const container = document.getElementById('coverage-grid');
-    if (!container) return;
+    const container = document.getElementById('coverage-metrics-grid');
+    if (!container || !data.latestRun?.coverage) return;
 
-    const branches = data.branches || {};
-    const coverageTypes = ['lines', 'functions', 'branches', 'statements'];
-    const typeIcons = {
-        lines: '📝',
-        functions: '⚡',
-        branches: '🌿',
-        statements: '📋'
-    };
+    const coverage = data.latestRun.coverage;
+    const metrics = [
+        { label: 'Lines', value: coverage.lines, target: 80 },
+        { label: 'Functions', value: coverage.functions, target: 80 },
+        { label: 'Branches', value: coverage.branches, target: 80 }
+    ];
 
-    // Calculate overall average coverage metrics across all branches
-    const overallCoverage = {};
-    coverageTypes.forEach(type => {
-        const values = Object.values(branches)
-            .filter(b => b.latestRun && typeof b.latestRun.coverage?.[type] === 'number')
-            .map(b => b.latestRun.coverage[type] || 0);
-
-        overallCoverage[type] = values.length > 0 ?
-            Math.round(values.reduce((a, b) => a + b, 0) / values.length) : 0;
-    });
-
-    container.innerHTML = coverageTypes.map(type => {
-        const percentage = overallCoverage[type];
-        const coverageClass = percentage >= 80 ? 'coverage-high' :
-                              percentage >= 60 ? 'coverage-medium' : 'coverage-low';
-        const statusText = percentage >= 80 ? '✅ Good' : percentage >= 60 ? '⚠️ Fair' : '❌ Low';
-
-        return `
-            <div class="coverage-card">
-                <div class="coverage-header">
-                    <div class="coverage-type">
-                        <div class="coverage-icon">${typeIcons[type]}</div>
-                        ${type.charAt(0).toUpperCase() + type.slice(1)} Coverage
-                    </div>
-                    <div class="coverage-percentage">${percentage}%</div>
-                </div>
-                <div class="coverage-progress">
-                    <div class="coverage-fill ${coverageClass}" style="width: ${percentage}%"></div>
-                </div>
-                <div class="coverage-details">
-                    <span>Target: 80%</span>
-                    <span>${statusText}</span>
-                </div>
+    container.innerHTML = metrics.map(m => `
+        <div class="coverage-card">
+            <div class="metric-info">
+                <span class="metric-label">${m.label}</span>
+                <span class="metric-value ${m.value < m.target ? 'warning' : 'success'}">
+                    ${m.value.toFixed(2)}%
+                </span>
             </div>
-        `;
-    }).join('');
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" style="width: ${m.value}%"></div>
+            </div>
+        </div>
+    `).join('');
 }
-
 /**
  * Renders individual branch performance cards.
  * @param {object} data - The dashboard data.
