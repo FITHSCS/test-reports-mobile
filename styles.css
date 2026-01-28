@@ -619,4 +619,52 @@ body {
     .compliance-card {
         padding: 20px;
     }
+
+    /* Professional Metric Cards */
+.coverage-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.metric-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.metric-value.warning {
+    color: #dc3545;
+    font-weight: 700;
+}
+
+.progress-bar-bg {
+    background: #e2e8f0;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    height: 100%;
+    transition: width 0.5s ease-out;
+}
+
+/* Consolidate Branch Section */
+.branch-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.branch-summary-table th {
+    text-align: left;
+    padding: 12px;
+    background: #f1f5f9;
+    color: #475569;
+}
 }
