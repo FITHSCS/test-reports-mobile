@@ -165,22 +165,28 @@
         </section>
 
         <!-- Recent Activity -->
-        <section class="activity-section">
-            <div class="section-header">
-                <h2>Recent Pipeline Activity</h2>
-                <div class="activity-legend">
-                    <button class="legend-item all active" onclick="filterTimeline('all')">All</button>
-                    <button class="legend-item success" onclick="filterTimeline('success')">Success</button>
-                    <button class="legend-item failed" onclick="filterTimeline('failed')">Failed</button>
-                </div>
-            </div>
-
-            <div class="activity-timeline">
-                <div id="timelineContainer">
-                    <!-- Dynamic content -->
-                </div>
-            </div>
-        </section>
+<section class="activity-section">
+    <div class="section-header">
+        <h2>Executive Branch Summary</h2>
+        <p class="subtitle">Overview of key active development streams</p>
+    </div>
+    
+    <div class="table-container">
+        <table class="branch-summary-table">
+            <thead>
+                <tr>
+                    <th>Branch</th>
+                    <th>Status</th>
+                    <th>Latest Run</th>
+                    <th>Coverage</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="branch-summary-body">
+                </tbody>
+        </table>
+    </div>
+</section>
 
         <!-- Compliance & Reporting -->
         <section class="compliance-section">
