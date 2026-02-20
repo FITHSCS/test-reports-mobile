@@ -3,14 +3,14 @@
   "projectName": "FITHSCS Mobile App",
   "repository": "https://github.com/FITHSCS/mobile",
   "latestRun": {
-    "runNumber": "329",
-    "branch": "81/merge",
-    "commit": "b1bf25e3d1173cfb56f0fedd6d740773b9cb89df",
-    "shortCommit": "b1bf25e",
+    "runNumber": "330",
+    "branch": "main",
+    "commit": "38a6004f2f4f2fa0f8ab0c31c1c5d2f11cf02315",
+    "shortCommit": "38a6004",
     "actor": "brukGit",
-    "timestamp": "2026-02-20T16:44:59.565Z",
+    "timestamp": "2026-02-20T16:45:20.804Z",
     "status": "failed",
-    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/22232590002",
+    "workflowUrl": "https://github.com/FITHSCS/mobile/actions/runs/22232600825",
     "coverage": {
       "lines": 0,
       "functions": 0,
@@ -19,15 +19,28 @@
     }
   },
   "stats": {
-    "totalRuns": 183,
+    "totalRuns": 184,
     "totalBranches": 26,
-    "successRate": 66.1
+    "successRate": 65.8
   },
   "branches": {
     "main": {
-      "totalRuns": 58,
+      "totalRuns": 59,
       "successfulRuns": 45,
       "runs": [
+        {
+          "runNumber": "330",
+          "status": "failed",
+          "timestamp": "2026-02-20T16:45:20.800Z",
+          "duration": 71,
+          "error": "Test execution failed",
+          "coverage": {
+            "lines": 0,
+            "functions": 0,
+            "branches": 0,
+            "statements": 0
+          }
+        },
         {
           "runNumber": "327",
           "status": "failed",
@@ -137,19 +150,6 @@
           "status": "unknown",
           "timestamp": "2025-07-13T11:36:33.593Z",
           "duration": 75,
-          "error": null,
-          "coverage": {
-            "lines": 0,
-            "functions": 0,
-            "branches": 0,
-            "statements": 0
-          }
-        },
-        {
-          "runNumber": "141",
-          "status": "unknown",
-          "timestamp": "2025-07-12T20:34:20.868Z",
-          "duration": 40,
           "error": null,
           "coverage": {
             "lines": 0,
